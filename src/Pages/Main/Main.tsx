@@ -23,7 +23,7 @@ const Main = () => {
                     <Box pad="small" background="brand">
                         <Sidebar background="brand" align="center" round="small"
                             footer={
-                                <Anchor icon={<Configure color='white' size='medium' />} href="" label="Configuração" key="" />
+                                <Anchor icon={<Configure color='white' size='medium' />} href="" label="Configuração " key="" />
                             }
                         >
                             <Nav gap="medium" pad='small' >
