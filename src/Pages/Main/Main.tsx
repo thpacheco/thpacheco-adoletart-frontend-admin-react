@@ -1,7 +1,6 @@
-import { Anchor, Avatar, Box, Button, grommet, Grommet, Nav, Sidebar } from "grommet";
-import { Analytics, BarChart, Cart, Compliance, Configure, Currency, FormAdd, Group } from "grommet-icons";
-import { BrowserRouter, Outlet } from "react-router-dom";
-import Routers from "../Router/Routes";
+import { Anchor, Avatar, Box, grommet, Grommet, Nav, Sidebar } from "grommet";
+import { Analytics, Cart, Compliance, Configure, Currency, Group } from "grommet-icons";
+import { Outlet } from "react-router-dom";
 
 const Main = () => {
     return (

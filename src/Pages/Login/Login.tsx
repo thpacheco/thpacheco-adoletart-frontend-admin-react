@@ -1,14 +1,10 @@
 import React from 'react';
 import { Box, Button, FormField, Text, grommet, Grommet, TextInput, Form, Spinner } from "grommet";
-import { Page } from "grommet/components/Page";
-import { PageContent } from "grommet/components/PageContent";
-import { Paragraph } from "grommet/components/Paragraph";
 import AuthService from '../../Services/auth.service';
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     let navigate = useNavigate();
-    const [value, setValue] = React.useState({});
     const [login, setLogin] = React.useState('');
     const [senha, setSenha] = React.useState('');
     const [ErrorMessage, setErrorMessage] = React.useState(false);
@@ -39,8 +35,6 @@ const Login = () => {
                     <Box width={{ min: '500px' }} height={{ min: '500px' }} border={{ color: 'brand', size: 'small' }} elevation='large' round="medium" pad="medium" background="light3">
                         <Text size='xlarge' color='brand' alignSelf='center' weight='bold' margin={{ bottom: "1em" }} >AdoletArt Admin</Text>
                         <Form style={{ margin: '0 0 0 3em', width: '18em' }}
-                            onChange={nextValue => setValue(nextValue)}
-                            onReset={() => setValue({})}
                             onSubmit={() => handleLogin()}
                         >
                             {ErrorMessage && <Text alignSelf='center' color='status-critical'>Usuário ou senha inválido</Text>}
