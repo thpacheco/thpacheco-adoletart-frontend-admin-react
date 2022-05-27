@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import CustumerPage from "../Custumer/CustumerPage";
 import DashboardPage from "../Dashboard/DashboardPage";
 import Login from "../Login/Login";
 import Main from "../Main/Main";
@@ -20,6 +21,14 @@ const Routers = () => {
                     element={
                         <PrivateRoute>
                             <DashboardPage />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/custumer"
+                    element={
+                        <PrivateRoute>
+                            <CustumerPage />
                         </PrivateRoute>
                     }
                 />
