@@ -60,7 +60,7 @@ const BudgetPage = () => {
                             />
                         </Box>
                         <Box width='small' pad='xsmall'>
-                            <Text weight='bold' color='white'>Vlr Unit</Text>
+                            <Text weight='bold' color='white'>Vlr Unt</Text>
                             <TextInput
                                 placeholder="Valor Unitário"
                                 value={dataBudget.valorUnitario}
