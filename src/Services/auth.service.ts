@@ -2,7 +2,6 @@ import axios from "axios";
 const API_URL = "https://thiago-golang-heroku.herokuapp.com/api/";
 class AuthService {
     login(email: string, password: string) {
-        debugger;
         return axios
             .post(API_URL + "auth/login", {
                 email,
