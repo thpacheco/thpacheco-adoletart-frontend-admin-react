@@ -1,0 +1,4 @@
+tarefa1:
+    script:
+    - echo "Pipe Iniciada"
+    - echo "Pipe 2 Iniciada"

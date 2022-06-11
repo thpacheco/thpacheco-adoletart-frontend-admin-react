@@ -1,19 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Routes from './Pages/Router/Routes';
 import App from './App';
-import Login from './Pages/Login/Login';
-import Main from './Pages/Main/Main';
-import { BrowserRouter, Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import Routers from './Pages/Router/Routes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <BrowserRouter>
-    <App />
+    <Routers />
   </BrowserRouter>,
 );
 

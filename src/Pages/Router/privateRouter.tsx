@@ -1,6 +1,5 @@
 import React from 'react';
-import { Navigate, Outlet, Route } from 'react-router-dom';
-import { string } from 'yup';
+import { Navigate, Outlet } from 'react-router-dom';
 import AuthHelper from '../../Common/AuthHelper';
 
 const isAuth = (): boolean => {

@@ -1,33 +1,36 @@
 import React from "react";
-import { BrowserRouter, Link, Navigate, Outlet, Route, Router, Routes } from "react-router-dom";
-import App from "../../App";
-import DashboardPage from "../Dashboard/DashboardPage";
+import { Route, Routes } from "react-router-dom";
+import LoadingComponent from "../../Components/Loading";
+import BudgetPage from "../Budget/BudgetPage";
+import CustumerNewPage from "../Custumer/CustumerNewPage";
+import CustumerListPage from "../Custumer/List/CustumerListPage";
 import Login from "../Login/Login";
 import Main from "../Main/Main";
+import PageNotFoundPage from "../PageNotFound/PageNotFoundPage";
 import PrivateRoute from "./privateRouter";
 
-const Routers = () => {
+const DashboardPage = React.lazy(() => import('../Dashboard/DashboardPage'));
+const CustumerEditPage = React.lazy(() => import('../Custumer/CustumerEditPage'));
 
+const Routers = () => {
     return (
-        <Routes>
-            <Route element={<Main />}>
-                <Route index element={
-                    <PrivateRoute>
-                        <DashboardPage />
-                    </PrivateRoute>
-                } />
-                <Route
-                    path="/dashboard"
-                    element={
-                        <PrivateRoute>
-                            <DashboardPage />
-                        </PrivateRoute>
-                    }
-                />
-            </Route>
-            <Route path="/login" element={<Login />}
-            />
-        </Routes>
+        <React.Suspense fallback={<LoadingComponent />}>
+            <Routes>
+                <Route element={<Login />}>
+                    <Route path="/login" element={<Login />} />
+                </Route>
+                <Route path="/*" element={<Main />}>
+                    <Route index element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
+                    <Route path="custumers/*">
+                        <Route index element={<PrivateRoute><CustumerListPage /></PrivateRoute>} />
+                        <Route path=':id' element={<PrivateRoute><CustumerEditPage /></PrivateRoute>} />
+                        <Route path='new' element={<PrivateRoute><CustumerNewPage /></PrivateRoute>} />
+                    </Route>
+                    <Route path="budget" element={<BudgetPage />} />
+                </Route>
+                <Route path="*" element={<PageNotFoundPage />}></Route>
+            </Routes>
+        </React.Suspense>
     );
 }
 export default Routers;
