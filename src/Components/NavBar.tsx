@@ -2,8 +2,8 @@ import { Accordion, AccordionPanel, Anchor, Box, Nav, Sidebar, Text } from "grom
 import { Analytics, Cart, Compliance, Configure, Currency, Group } from "grommet-icons";
 
 const SidebarComponet = () => {
-    const image = <Box>
-        <Anchor icon={<Analytics color='white' size='medium' />} href="/dashboard" label="Gráficos" key="" />
+    const custumerImage = <Box>
+        <Anchor icon={<Analytics color='white' size='medium' />} href="custumer" label="Clientes" key="" />
     </Box>;
     return (
         <Box width="auto" background="light-2">
@@ -13,32 +13,18 @@ const SidebarComponet = () => {
                 }
             >
                 <Nav gap="medium" pad='medium' >
-                    <Accordion>
-                        <AccordionPanel label={image}>
+                    {/* <Accordion>
+                        <AccordionPanel label={custumerImage}>
                             <Box pad="medium">
-                                <Anchor icon={<Analytics color='white' size='medium' />} href="/dashboard" label="Gráficos" key="" />
-                            </Box>
-                            <Box>
-                                <Anchor icon={<Analytics color='white' size='medium' />} href="/dashboard" label="Gráficos" key="" />
+                                <Anchor icon={<Analytics color='white' size='medium' />} href="custumer" label="Clientes" key="" />
                             </Box>
                         </AccordionPanel>
-                    </Accordion>
-                    <Anchor icon={<Analytics color='white' size='medium' />} href="/dashboard" label="Gráficos" key="" />
-                    <Anchor icon={<Group color='white' size='medium' />} href="/custumer" label="Clientes" key="" />
-                    <Anchor icon={<Currency color='white' size='medium' />} href="budget" label="Orçamento" />
+                    </Accordion> */}
+                    <Anchor icon={<Group color='white' size='medium' />} href="/custumers" label="Clientes" key="" />
+                    <Anchor icon={<Currency color='white' size='medium' />} href="/budget" label="Orçamento" />
                     <Anchor icon={<Cart color='white' size='medium' />} href="" label="Pedidos" key="" />
                     <Anchor icon={<Compliance color='white' size='medium' />} href="" label="Relatórios" key="" />
                 </Nav>
-                <Accordion>
-                    <AccordionPanel label="sta">
-                        <Box pad="medium">
-                            <Text>thisis</Text>
-                        </Box>
-                        <Box>
-                            <Text>this is 22</Text>
-                        </Box>
-                    </AccordionPanel>
-                </Accordion>
             </Sidebar>
         </Box>
     );

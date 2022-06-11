@@ -2,13 +2,13 @@ import { Avatar, Box, Button, Card, Form, FormField, Grid, Heading, Page, PageCo
 import { Basket, Compliance, User } from "grommet-icons";
 import { useState } from "react";
 
-const CustumerPage = () => {
+const CustumerEditPage = () => {
     const [value, setValue] = useState({});
     return (
-        <Page fill >
+        <Page fill>
             <PageContent fill pad='xsmall' >
                 {/* <Heading size='small'>Clientes</Heading> */}
-                <Grid fill
+                <Grid fill 
                     rows={['xxsmall', 'auto']}
                     columns={['medium', 'auto']}
                     gap="small"
@@ -18,7 +18,7 @@ const CustumerPage = () => {
                         { name: 'main', start: [1, 1], end: [1, 1] },
                     ]}
                 >
-                    <Box gridArea="header" background="brand"> <Text margin='0.1em' weight='bold' size="2em" color='white'>Clientes</Text></Box>
+                    <Box gridArea="header" background="#2c2828" pad='xsmall'> <Text weight='bold' size="1.5em" color='white'>Cliente</Text></Box>
                     <Box direction="column" pad='medium' gridArea="nav" background="#2c2828">
                         <Box direction="column" align="center">
                             <Box >
@@ -33,10 +33,10 @@ const CustumerPage = () => {
                         <Box direction="column" align="start">
                             <Box direction="column" pad='small'>
                                 <Text weight='bold' color='white'>Celular:</Text>
-                                <Box>thiagopacheco30@gmail.com</Box>
+                                <Text color='white'>(11) 97999-3131</Text>
                             </Box>
                             <Box direction="column" pad='small'>
-                                <Text weight='bold' color='white'>Celular:</Text>
+                                <Text weight='bold' color='white'>Email:</Text>
                                 <Box>thiagopacheco30@gmail.com</Box>
                             </Box>
                             <Box direction="column" pad='small'>
@@ -71,4 +71,4 @@ const CustumerPage = () => {
             </PageContent>
         </Page>
     )
-}; export default CustumerPage;
+}; export default CustumerEditPage;

@@ -12,7 +12,7 @@ const Main = () => {
                     <HeaderComponent />
                     <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
                         <SidebarComponet />
-                        <Box overflow="auto" pad='none'flex background="#15131a">
+                        <Box overflow="auto" flex background="#15131a">
                             <Outlet />
                         </Box>
                     </Box>
