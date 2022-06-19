@@ -44,8 +44,17 @@ const BudgetPage = () => {
                         { name: 'main', start: [1, 1], end: [1, 1] },
                     ]}
                 >
-                    <Box gridArea="header" background="brand" pad='xsmall'> <Text weight='bold' size="1.5em" color='white'>Orçamento</Text></Box>
-                    <Box direction="column" pad='small' gridArea="nav" background="#2c2828">
+                    <Box
+                    gridArea="header"
+                    direction="row"
+                    align="center"
+                    justify="between"
+                    pad={{ horizontal: 'medium', vertical: 'small' }}
+                    
+                >
+                    <Text weight='bold' size="1.4em" color='white' >Orçamentos</Text>
+                </Box>
+                    <Box direction="column" pad='small' gridArea="nav">
                         <Box direction="row" pad='xsmall'>
                             <Box width='medium' pad='xsmall'>
                                 <Text weight='bold' color='white'>Produto</Text>
@@ -84,7 +93,7 @@ const BudgetPage = () => {
                             </Box>
                         </Box>
                     </Box>
-                    <Box gridArea="main" background="#2c2828" height='auto'>
+                    <Box gridArea="main" height='auto'>
                         <Box direction='column'>
                             <Box align="center">
                                 <Text weight='bold' size="1.5em" color='white'>Jessíca</Text>

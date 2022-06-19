@@ -1,28 +1,34 @@
-import { Box, Button, DataTable, Page, PageContent, Text } from "grommet";
+import { Box, Button, DataTable, Page, PageContent, Spinner, Text } from "grommet";
 import { Add, Checkmark, Currency, Erase, FormTrash } from "grommet-icons";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Custumer from "../../../Models/CustumerModel";
+import CustumerService from '../../../Services/custumer.service'
+
+export const custumes: Custumer = {
+    id: 0,
+    name: '',
+    email: '',
+    telephone: ''
+};
 
 const CustumerListPage = () => {
     let navigate = useNavigate();
+    const [listCustumers, setCustumers] = useState([custumes]);
+    const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+        getListAllCustumers();
+    }, []);
 
-    const listCustumers = [
-        { nome: 'Jessíca Xavier a', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true },
-        { nome: 'Jessíca Xavier', telefone: '(11) 97999-3131', email: 'jessicaalves@hotmaiil.com', ativo: true }]
+    const getListAllCustumers = () => {
+        setLoading(true)
+        CustumerService.listAllCustumers().then(
+            (response) => {
+                setCustumers(response.data)
+                setLoading(false)
+            });
+    }
     return (
         <Page fill>
             <PageContent fill pad='xsmall'>
@@ -38,15 +44,29 @@ const CustumerListPage = () => {
                 </Box>
                 <Box margin='small'>
                     <DataTable step={10} paginate
+                        placeholder={
+                            loading && (<Box
+                                fill
+                                align="center"
+                                justify="center"
+                                direction="row"
+                                pad="large"
+                                gap="small"
+                                background={{ color: 'background-front', opacity: 'strong' }}
+                            >
+                                <Spinner />
+                                <Text weight="bold">Carregando ...</Text>
+                            </Box>)
+                        }
                         columns={[
                             {
-                                property: 'nome',
+                                property: 'name',
                                 header: <Text>Nome</Text>,
                                 primary: true,
                                 sortable: true
                             },
                             {
-                                property: 'telefone',
+                                property: 'telephone',
                                 header: <Text>Telefone</Text>,
                                 primary: true,
                             },
@@ -63,10 +83,10 @@ const CustumerListPage = () => {
                             },
                             {
                                 property: '',
-                                render: () => (<Button
+                                render: (dataItem) => (<Button
                                     a11yTitle="100 Filters Applied"
                                     icon={<Erase color='neutral-3' />}
-                                    onClick={() => { navigate(`/custumers/${10}`, { replace: true }); }}
+                                    onClick={() => { navigate(`${dataItem.id}`, { replace: true }); }}
                                     secondary
                                     color="dark-1"
                                 />

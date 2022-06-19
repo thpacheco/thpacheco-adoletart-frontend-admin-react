@@ -2,15 +2,17 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import LoadingComponent from "../../Components/Loading";
 import BudgetPage from "../Budget/BudgetPage";
+import CustumerEditPage from "../Custumer/CustumerEditPage";
 import CustumerNewPage from "../Custumer/CustumerNewPage";
 import CustumerListPage from "../Custumer/List/CustumerListPage";
+import DashboardPage from "../Dashboard/DashboardPage";
 import Login from "../Login/Login";
 import Main from "../Main/Main";
 import PageNotFoundPage from "../PageNotFound/PageNotFoundPage";
 import PrivateRoute from "./privateRouter";
 
-const DashboardPage = React.lazy(() => import('../Dashboard/DashboardPage'));
-const CustumerEditPage = React.lazy(() => import('../Custumer/CustumerEditPage'));
+// const DashboardPage = React.lazy(() => import('../Dashboard/DashboardPage'));
+// const CustumerEditPage = React.lazy(() => import('../Custumer/CustumerEditPage'));
 
 const Routers = () => {
     return (
