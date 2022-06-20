@@ -40,7 +40,7 @@ const CustumerListPage = () => {
                     pad={{ horizontal: 'medium', vertical: 'small' }}
                 >
                     <Text weight='bold' size="1.4em" color='white' >Todos seus clientes</Text>
-                    <Button onClick={() => { navigate('new', { replace: true }); }} primary icon={<Add size='medium' />} label="Novo Cliente" margin={{ end: 'xsmall' }} />
+                    <Button onClick={() => { navigate('new', { replace: true }); }} primary icon={<Add size='medium' />} label="Novo" margin={{ end: 'xsmall' }} />
                 </Box>
                 <Box margin='small'>
                     <DataTable step={10} paginate

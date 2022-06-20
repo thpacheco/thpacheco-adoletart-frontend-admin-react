@@ -1,11 +1,12 @@
 import axios from "axios";
 import AuthHelper from "../Common/AuthHelper";
 import Custumer from "../Models/CustumerModel";
-const API_URL = "https://thiago-golang-heroku.herokuapp.com/api/";
+const API_URL = "http://localhost:8080/api/";
 
 const header = {
     headers: {
-        Authorization: `${AuthHelper.getToken()}`
+        Authorization: `${AuthHelper.getToken()}`,
+        'Content-Type': 'application/json',
     }
 };
 
@@ -13,7 +14,7 @@ class CustumerService {
     createNewCustumer(objCreate: Custumer) {
         console.log(header);
         return axios
-            .post(API_URL + "custumer", objCreate, header)
+            .post(API_URL + "custumer/", objCreate, header)
             .then(response => {
                 if (response.data) {
                 }
