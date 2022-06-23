@@ -12,7 +12,7 @@ const HeaderComponent = () => {
             >
                 <Box direction="row" pad='none' align="center" gap="small">
                     <Avatar background="dark-1">IRIS</Avatar>
-                    <Anchor color="white" size="xlarge" href="">
+                    <Anchor color="white" size="xlarge" href="/">
                         Adoleta arts
                     </Anchor>
                 </Box>

@@ -42,6 +42,7 @@ class CustumerService {
                 console.log('error ' + error);
             });
     }
+
     getCustumerByID(id: number) {
         return axios.get(API_URL + "custumer/" + id, header)
             .then(response => {
@@ -50,6 +51,28 @@ class CustumerService {
             .catch((error) => {
                 console.log('error ' + error);
             });
+
+    }
+
+    deleteCustumer(id: number) {
+        return axios.delete(API_URL + "custumer/" + id, header)
+            .then(response => {
+                return response.data
+            })
+            .catch((error) => {
+                console.log('error ' + error);
+            });
+    }
+
+    countAllCustumer() {
+        return axios.get(API_URL + "custumer/count", header)
+            .then(response => {
+                return response.data
+            })
+            .catch((error) => {
+                console.log('error ' + error);
+            });
     }
 }
+
 export default new CustumerService();

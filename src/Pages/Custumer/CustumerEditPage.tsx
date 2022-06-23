@@ -20,14 +20,16 @@ export const NotificatioModel: NotificationModel = {
     message: '',
     status: '',
 }
+
 const CustumerEditPage = () => {
     const [value, setValue] = useState({});
     const [custumer, setCustumer] = useState(editCustumer);
     const [notification, setNotification] = useState(NotificatioModel);
     const [msgvisible, setMsgVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [open, setOpen] = useState(false);
     let params = useParams();
-    console.log(params.id)
+
 
     useEffect(() => {
         getCustumerByID(Number(params.id));
