@@ -10,9 +10,15 @@ import AuthService from '../../Services/auth.service'
 
 export const CustumerCreate: Custumer = {
     id: 0,
+<<<<<<< HEAD
     name: '',
     email: '',
     telephone: '',
+=======
+    name: 'Teste 02',
+    email: 'teste@teste.com',
+    telephone: '11 979993131',
+>>>>>>> c7cea5d (Dasboard feito)
 };
 
 export const NotificatioModel: NotificationModel = {

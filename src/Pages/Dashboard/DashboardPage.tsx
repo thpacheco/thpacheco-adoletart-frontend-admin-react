@@ -14,6 +14,10 @@ const DashboardPage = () => {
     const TotaldeClientes = () => {
         CustumerService.countAllCustumer().then(
             (response) => {
+<<<<<<< HEAD
+=======
+                console.log(response.data)
+>>>>>>> c7cea5d (Dasboard feito)
                 setotalCustumers(response.data)
             },
             () => {

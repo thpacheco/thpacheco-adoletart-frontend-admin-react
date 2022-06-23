@@ -46,7 +46,7 @@ const ProductNewPage = () => {
         const formatCurrency = _formatCurrency(money);
         debugger;
         const moneyMask = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(10.99)
-        setProductCreate({ ...productCreate, [prop]: formatCurrency ? formatCurrency == });
+        setProductCreate({ ...productCreate, [prop]: formatCurrency });
     };
 
     const _formatCurrency = (amount: any) => {
