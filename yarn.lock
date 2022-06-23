@@ -7481,7 +7481,11 @@ prompts@^2.0.1, prompts@^2.4.2:
     sisteransi "^1.0.5"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 prop-types@^15.5.6, prop-types@^15.6.2, prop-types@^15.8.1:
+=======
+prop-types@^15.6.2, prop-types@^15.8.1:
+>>>>>>> c7cea5d (Dasboard feito)
 =======
 prop-types@^15.6.2, prop-types@^15.8.1:
 >>>>>>> c7cea5d (Dasboard feito)
@@ -7580,11 +7584,14 @@ react-app-polyfill@^3.0.0:
     whatwg-fetch "^3.6.2"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 react-currency-input-field@^3.6.9:
   version "3.6.9"
   resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.6.9.tgz#5eaa1190512d1de214863032045b67dd0582c87a"
   integrity sha512-GNqG1Np+dz3VfBhDc9pFPIyar9SgB/fRjIofFSXOoyFNffda5r24n6LSoXfqQ9L7IKRDoUwveMMJV5GCM2eByw==
 
+=======
+>>>>>>> c7cea5d (Dasboard feito)
 =======
 >>>>>>> c7cea5d (Dasboard feito)
 react-dev-utils@^12.0.1:
@@ -7636,11 +7643,14 @@ react-fast-compare@^2.0.1:
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 react-intl-currency-input@^0.2.6:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/react-intl-currency-input/-/react-intl-currency-input-0.2.6.tgz#d71396a9db478fa5341ac562af2fd9c20afb7683"
   integrity sha512-As8Kg3m9BKwD4liefx/gxG6Dge/8GjdZQBDVlwUUxrgtqWUkRNvRj9Iy4pNx4+o1xpXaEt+gfjtzO6r8uTNBlg==
 
+=======
+>>>>>>> c7cea5d (Dasboard feito)
 =======
 >>>>>>> c7cea5d (Dasboard feito)
 react-is@^16.13.1, react-is@^16.7.0:
@@ -7734,6 +7744,7 @@ react-scripts@5.0.1:
     fsevents "^2.3.2"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 react-text-mask@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/react-text-mask/-/react-text-mask-5.5.0.tgz#468ea690160b364981205f5633e7475e939383ff"
@@ -7741,6 +7752,8 @@ react-text-mask@^5.5.0:
   dependencies:
     prop-types "^15.5.6"
 
+=======
+>>>>>>> c7cea5d (Dasboard feito)
 =======
 >>>>>>> c7cea5d (Dasboard feito)
 react-transition-group@^4.4.2:
@@ -8690,11 +8703,14 @@ test-exclude@^6.0.0:
     minimatch "^3.0.4"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 text-mask-addons@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/text-mask-addons/-/text-mask-addons-3.8.0.tgz#17b61ef665a4f36811f2ea1f01a223b4be61ab26"
   integrity sha512-VSZSdc/tKn4zGxgpJ+uNBzoW1t472AoAFIlbw1K7hSNXz0DfSBYDJNRxLqgxOfWw1BY2z6DQpm7g0sYZn5qLpg==
 
+=======
+>>>>>>> c7cea5d (Dasboard feito)
 =======
 >>>>>>> c7cea5d (Dasboard feito)
 text-table@^0.2.0:

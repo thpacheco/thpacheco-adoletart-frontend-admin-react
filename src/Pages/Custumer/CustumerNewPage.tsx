@@ -11,10 +11,13 @@ import AuthService from '../../Services/auth.service'
 export const CustumerCreate: Custumer = {
     id: 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
     name: '',
     email: '',
     telephone: '',
 =======
+=======
+>>>>>>> c7cea5d (Dasboard feito)
     name: 'Teste 02',
     email: 'teste@teste.com',
     telephone: '11 979993131',

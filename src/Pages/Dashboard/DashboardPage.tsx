@@ -15,6 +15,10 @@ const DashboardPage = () => {
         CustumerService.countAllCustumer().then(
             (response) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                console.log(response.data)
+>>>>>>> c7cea5d (Dasboard feito)
 =======
                 console.log(response.data)
 >>>>>>> c7cea5d (Dasboard feito)
