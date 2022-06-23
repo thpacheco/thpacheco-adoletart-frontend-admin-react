@@ -1,7 +1,7 @@
 import axios from "axios";
 import AuthHelper from "../Common/AuthHelper";
 import Custumer from "../Models/CustumerModel";
-const API_URL = "http://localhost:8080/api/";
+const API_URL = "https://thiago-golang-heroku.herokuapp.com/api/";
 
 const header = {
     headers: {
