@@ -9,6 +9,9 @@ import DashboardPage from "../Dashboard/DashboardPage";
 import Login from "../Login/Login";
 import Main from "../Main/Main";
 import PageNotFoundPage from "../PageNotFound/PageNotFoundPage";
+import ProductListPage from "../Product/List/ProductListPage";
+import ProductEditPage from "../Product/ProductEditPage";
+import ProductNewPage from "../Product/ProductNewPage";
 import PrivateRoute from "./privateRouter";
 
 // const DashboardPage = React.lazy(() => import('../Dashboard/DashboardPage'));
@@ -16,23 +19,26 @@ import PrivateRoute from "./privateRouter";
 
 const Routers = () => {
     return (
-        <React.Suspense fallback={<LoadingComponent />}>
-            <Routes>
-                <Route element={<Login />}>
-                    <Route path="/login" element={<Login />} />
+        <Routes>
+            <Route element={<Login />}>
+                <Route path="/login" element={<Login />} />
+            </Route>
+            <Route path="/*" element={<Main />}>
+                <Route index element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
+                <Route path="custumers/*">
+                    <Route index element={<PrivateRoute><CustumerListPage /></PrivateRoute>} />
+                    <Route path=':id' element={<PrivateRoute><CustumerEditPage /></PrivateRoute>} />
+                    <Route path='new' element={<PrivateRoute><CustumerNewPage /></PrivateRoute>} />
                 </Route>
-                <Route path="/*" element={<Main />}>
-                    <Route index element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
-                    <Route path="custumers/*">
-                        <Route index element={<PrivateRoute><CustumerListPage /></PrivateRoute>} />
-                        <Route path=':id' element={<PrivateRoute><CustumerEditPage /></PrivateRoute>} />
-                        <Route path='new' element={<PrivateRoute><CustumerNewPage /></PrivateRoute>} />
-                    </Route>
-                    <Route path="budget" element={<BudgetPage />} />
+                <Route path="products/*">
+                    <Route index element={<PrivateRoute><ProductListPage /></PrivateRoute>} />
+                    <Route path=':id' element={<PrivateRoute><ProductEditPage /></PrivateRoute>} />
+                    <Route path='new' element={<PrivateRoute><ProductNewPage /></PrivateRoute>} />
                 </Route>
-                <Route path="*" element={<PageNotFoundPage />}></Route>
-            </Routes>
-        </React.Suspense>
+                <Route path="budget" element={<BudgetPage />} />
+            </Route>
+            <Route path="*" element={<PageNotFoundPage />}></Route>
+        </Routes>
     );
 }
 export default Routers;

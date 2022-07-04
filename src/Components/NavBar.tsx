@@ -1,5 +1,5 @@
 import { Accordion, AccordionPanel, Anchor, Box, Nav, Sidebar, Text } from "grommet";
-import { Analytics, Cart, Compliance, Configure, Currency, Group } from "grommet-icons";
+import { Analytics, Cart, Compliance, Configure, Currency, Group, Package } from "grommet-icons";
 
 const SidebarComponet = () => {
     const custumerImage = <Box>
@@ -21,6 +21,7 @@ const SidebarComponet = () => {
                         </AccordionPanel>
                     </Accordion> */}
                     <Anchor icon={<Group color='white' size='medium' />} href="/custumers" label="Clientes" key="" />
+                    <Anchor icon={<Package color='white' size='medium' />} href="/products" label="Produtos" key="" />
                     <Anchor icon={<Currency color='white' size='medium' />} href="/budget" label="Orçamento" />
                     <Anchor icon={<Cart color='white' size='medium' />} href="" label="Pedidos" key="" />
                     <Anchor icon={<Compliance color='white' size='medium' />} href="" label="Relatórios" key="" />

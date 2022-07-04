@@ -1,6 +1,7 @@
 import axios from "axios";
 import AuthHelper from "../Common/AuthHelper";
 import Custumer from "../Models/CustumerModel";
+import Product from "../Models/ProductModel";
 // const API_URL = "https://thiago-golang-heroku.herokuapp.com/api/";
 const API_URL = "http://localhost:8080/api/";
 
@@ -11,11 +12,10 @@ const header = {
     }
 };
 
-class CustumerService {
-    createNewCustumer(objCreate: Custumer) {
-        console.log(header);
+class ProductService {
+    createNewProduct(objCreate: Product) {
         return axios
-            .post(API_URL + "custumer/", objCreate, header)
+            .post(API_URL + "product/", objCreate, header)
             .then(response => {
                 if (response.data) {
                 }
@@ -23,10 +23,9 @@ class CustumerService {
             });
     }
 
-    updateCustumer(id: number, objCreate: Custumer) {
-        console.log(header);
+    updateProduct(id: number, objCreate: Product) {
         return axios
-            .put(API_URL + "custumer/" + id, objCreate, header)
+            .put(API_URL + "product/" + id, objCreate, header)
             .then(response => {
                 if (response.data) {
                 }
@@ -34,8 +33,8 @@ class CustumerService {
             });
     }
 
-    listAllCustumers() {
-        return axios.get(API_URL + "custumer/", header)
+    listAllProducts() {
+        return axios.get(API_URL + "product/", header)
             .then(response => {
                 return response.data
             })
@@ -44,8 +43,8 @@ class CustumerService {
             });
     }
 
-    getCustumerByID(id: number) {
-        return axios.get(API_URL + "custumer/" + id, header)
+    getProductByID(id: number) {
+        return axios.get(API_URL + "product/" + id, header)
             .then(response => {
                 return response.data
             })
@@ -55,8 +54,8 @@ class CustumerService {
 
     }
 
-    deleteCustumer(id: number) {
-        return axios.delete(API_URL + "custumer/" + id, header)
+    deleteProduct(id: number) {
+        return axios.delete(API_URL + "product/" + id, header)
             .then(response => {
                 return response.data
             })
@@ -76,4 +75,4 @@ class CustumerService {
     }
 }
 
-export default new CustumerService();
+export default new ProductService();

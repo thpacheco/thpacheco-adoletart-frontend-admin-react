@@ -1,4 +1,4 @@
-import { Page, PageContent, Button, Box, Form, FormField, TextInput, Text, Notification, Spinner } from "grommet";
+import { Page, PageContent, Button, Box, Form, FormField, TextInput, Text, Notification, Spinner, MaskedInput } from "grommet";
 import { useState } from "react";
 import { StatusNotification } from "../../Common/Enum/StatusNotificarion";
 import NotificationComponent from "../../Components/notification";
@@ -93,9 +93,31 @@ const CustumerNewPage = () => {
                                     onChange={handleChange('email')} />
                             </FormField>
                             <FormField name="name" htmlFor="text-input-id" label="Celular">
-                                <TextInput id="text-input-id" name="name"
+                                <MaskedInput
+                                    mask={[
+                                        { fixed: '(' },
+                                        {
+                                            length: 3,
+                                            regexp: /^[0-9]{1,3}$/,
+                                            placeholder: 'xxx',
+                                        },
+                                        { fixed: ')' },
+                                        { fixed: ' ' },
+                                        {
+                                            length: 3,
+                                            regexp: /^[0-9]{1,4}$/,
+                                            placeholder: 'xxxx',
+                                        },
+                                        { fixed: '-' },
+                                        {
+                                            length: 4,
+                                            regexp: /^[0-9]{1,4}$/,
+                                            placeholder: 'xxxx',
+                                        },
+                                    ]}
                                     value={custumerCreate.telephone}
-                                    onChange={handleChange('telephone')} />
+                                    onChange={handleChange('telephone')}
+                                />
                             </FormField>
                             <Box direction="row" gap="medium">
                                 {loading ? spinner : <Button type="submit" primary label="Salvar" />}

@@ -2,7 +2,7 @@ import { Anchor, Avatar, Box } from "grommet";
 
 const HeaderComponent = () => {
     return (
-        <Box tag="header" background="#0d0a14" justify="between" pad="small">
+        <Box tag="header" background="brand" justify="between" pad="small">
             <Box
                 gridArea="header"
                 direction="row"

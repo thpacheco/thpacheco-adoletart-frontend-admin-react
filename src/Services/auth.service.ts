@@ -1,5 +1,6 @@
 import axios from "axios";
-const API_URL = "https://thiago-golang-heroku.herokuapp.com/api/";
+// const API_URL = "https://thiago-golang-heroku.herokuapp.com/api/";
+const API_URL = "http://localhost:8080/api/";
 class AuthService {
     login(email: string, password: string) {
         return axios
