@@ -9,12 +9,12 @@ import Product from "../../Models/ProductModel";
 
 export const ProductCreate: Product = {
     id: 0,
-    name: 'Caixa dia dos pais',
+    name: '',
     price: 0,
     ammount: 0,
     ammountMinimun: 0,
     ammountCharged: 0,
-    description: 'Breve descrição do produto'
+    description: ''
 };
 
 export const NotificatioModel: NotificationModel = {

@@ -16,7 +16,7 @@ export const editProduct: Product = {
     ammount: 0,
     ammountMinimun: 0,
     ammountCharged: 0,
-    description: 'Breve descrição'
+    description: ''
 };
 export const NotificatioModel: NotificationModel = {
     title: '',
@@ -33,7 +33,6 @@ const ProductEditPage = () => {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     let params = useParams();
-
 
     useEffect(() => {
         getCustumerByID(Number(params.id));
