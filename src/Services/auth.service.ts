@@ -13,7 +13,7 @@ let axiosConfig = {
 class AuthService {
     login(email: string, password: string) {
         return axios
-            .post(API_URL + "auth_", {
+            .post(API_URL + "auth", {
                 email,
                 password,
                 axiosConfig
