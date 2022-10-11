@@ -8,7 +8,9 @@ const API_URL = "http://localhost:8080/api/";
 const header = {
     headers: {
         Authorization: `${AuthHelper.getToken()}`,
-        'Content-Type': 'application/json',
+        "Content-Type" : "application/json",
+        "Access-Control-Allow-Headers" : "Content-Type",
+        "Access-Control-Allow-Origin": "*"
     }
 };
 

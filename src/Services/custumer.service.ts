@@ -3,11 +3,12 @@ import AuthHelper from "../Common/AuthHelper";
 import Custumer from "../Models/CustumerModel";
 const API_URL = "http://adoleta-api-dev.us-east-1.elasticbeanstalk.com/v1/api/";
 // const API_URL = "https://localhost:7043/v1/api/";
-
 const header = {
     headers: {
         Authorization: `${AuthHelper.getToken()}`,
-        'Content-Type': 'application/json',
+        "Content-Type" : "application/json",
+        "Access-Control-Allow-Headers" : "Content-Type",
+        "Access-Control-Allow-Origin": "*"
     }
 };
 

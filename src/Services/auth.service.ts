@@ -4,8 +4,9 @@ const API_URL = "http://adoleta-api-dev.us-east-1.elasticbeanstalk.com/v1/api/";
 
 let axiosConfig = {
     headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "*",
+        "Content-Type" : "application/json",
+        "Access-Control-Allow-Headers" : "Content-Type",
+        "Access-Control-Allow-Origin": "*"
     }
   };
 
