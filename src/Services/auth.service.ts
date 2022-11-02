@@ -15,8 +15,7 @@ class AuthService {
         return axios
             .post(API_URL + "auth", {
                 email,
-                password,
-                axiosConfig
+                password
             })
             .then(response => {
                 if (response.data.data.token) {
