@@ -1,7 +1,7 @@
 import axios from "axios";
 import AuthHelper from "../Common/AuthHelper";
 import Custumer from "../Models/CustumerModel";
-const API_URL = "https://adoleta-api-dev.us-east-1.elasticbeanstalk.com/v1/api/";
+const API_URL = "https://api.adoletarts.com.br/v1/api/";
 // const API_URL = "https://localhost:7043/v1/api/";
 const header = {
     headers: {
@@ -14,7 +14,6 @@ const header = {
 
 class CustumerService {
     createNewCustumer(objCreate: Custumer) {
-        console.log(header);
         return axios
             .post(API_URL + "custumer", objCreate, header)
             .then(response => {
