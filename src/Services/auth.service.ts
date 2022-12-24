@@ -1,12 +1,10 @@
 import axios from "axios";
-const API_URL = "https://adoleta-api-dev.us-east-1.elasticbeanstalk.com/v1/api/";
+const API_URL = "https://api.adoletarts.com.br/v1/api/";
 // const API_URL = "https://localhost:7043/v1/api/";
 
 let axiosConfig = {
     headers: {
-        "Content-Type" : "application/json",
-        "Access-Control-Allow-Headers" : "Content-Type",
-        "Access-Control-Allow-Origin": "*"
+        "Content-Type" : "application/json"
     }
   };
 
@@ -16,7 +14,7 @@ class AuthService {
             .post(API_URL + "auth", {
                 email,
                 password
-            })
+            },axiosConfig)
             .then(response => {
                 if (response.data.data.token) {
                     localStorage.setItem("accessToken", JSON.stringify(response.data));

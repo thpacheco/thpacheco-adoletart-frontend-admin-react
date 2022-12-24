@@ -2,9 +2,8 @@ import axios from "axios";
 import AuthHelper from "../Common/AuthHelper";
 import Custumer from "../Models/CustumerModel";
 import Product from "../Models/ProductModel";
-// const API_URL = "https://thiago-golang-heroku.herokuapp.com/api/";
 // const API_URL = "https://localhost:8080/api/";
-const API_URL = "https://adoleta-api-dev.us-east-1.elasticbeanstalk.com/v1/api/";
+const API_URL = "https://api.adoletarts.com.br/v1/api/";
 
 const header = {
     headers: {
