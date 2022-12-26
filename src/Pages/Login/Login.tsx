@@ -33,7 +33,7 @@ const Login = () => {
             <Layer full>
                 <Box flex={true} align='center' background="#0d0a14" alignContent='center' pad="large">
                     <Box width={{ min: '500px' }} height={{ min: '500px' }} border={{ color: '#6FFFB0', size: 'small' }} elevation='large' round="medium" pad="medium" background="light3">
-                        <Text size='xxlarge' color='brand' alignSelf='center' weight='bold' margin={{ bottom: "1em" }} >AdoletArt Admin</Text>
+                        <Text size='xxlarge' color='brand' alignSelf='center' weight='bold' margin={{ bottom: "1em" }} >Adoletarts Admin</Text>
                         <Form style={{ margin: '0 0 0 3em', width: '18em' }}
                             onSubmit={() => handleLogin()}
                         >
