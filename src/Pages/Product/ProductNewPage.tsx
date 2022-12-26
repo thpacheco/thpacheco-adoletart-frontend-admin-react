@@ -6,11 +6,10 @@ import NotificationModel from "../../Models/Notification.model";
 import ProductService from '../../Services/product.service'
 import Product from "../../Models/ProductModel";
 
-
 export const ProductCreate: Product = {
     id: 0,
     name: '',
-    price: 0,
+    price: 10.65,
     ammount: 0,
     ammountMinimun: 0,
     ammountCharged: 0,
@@ -22,20 +21,6 @@ export const NotificatioModel: NotificationModel = {
     message: '',
     status: '',
 }
-
-const currencyConfig = {
-    locale: "pt-BR",
-    formats: {
-      number: {
-        BRL: {
-          style: "currency",
-          currency: "BRL",
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        },
-      },
-    },
-  };
 
 const ProductNewPage = () => {
     const [productCreate, setProductCreate] = useState(ProductCreate);
@@ -55,14 +40,38 @@ const ProductNewPage = () => {
         ]}
     />;
 
-    const handleChangeMasked = (event:any, value:any, maskedValue:any) => {
-        event.preventDefault();
-    
-        console.log(value); // value without mask (ex: 1234.56)
-        console.log(maskedValue); // masked value (ex: R$1234,56)
-      };
+    const handleChangeMasked = (prop: keyof any) => async (event: React.ChangeEvent<{ value: unknown }>) => {
 
-      
+        const money = String(event.target.value);
+        const formatCurrency = _formatCurrency(money);
+        debugger;
+        const moneyMask = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(10.99)
+        setProductCreate({ ...productCreate, [prop]: formatCurrency ? formatCurrency == });
+    };
+
+    const _formatCurrency = (amount: any) => {
+        debugger
+        amount = amount.replace(/(\d)(?=(\d{3})+(\.(\d){0,2})*$)/g, '$1,');
+
+        if (amount.indexOf(',') === -1)
+            return amount + '.00';
+
+        var decimals = amount.split(',')[1];
+        
+        const valueFinal = decimals.length < 2 ? amount : amount;
+
+        var split = valueFinal.replace(/,/g, '.');
+
+        const digitMoney3 = Number(split.replace(/[^0-9\.]+/g,""));
+
+        return digitMoney3;
+    };
+
+    // const FloatConvertMoney = () => {
+    //     var number = Number(currency.replace(/[^0-9\.]+/g,""));
+    // }
+
+
     const SalveNewProduct = () => {
         debugger
         const objCreate: Product = { ...productCreate, price: Number(productCreate.price), ammount: Number(productCreate.ammount), ammountCharged: Number(productCreate.ammountCharged), ammountMinimun: Number(productCreate.ammountMinimun) };
@@ -117,9 +126,9 @@ const ProductNewPage = () => {
                                 justify="between"
                             >
                                 <FormField name="name" htmlFor="text-input-id" label="Preço">
-                                    <TextInput type="number" id="text-input-id" name="price"
-                                        value={productCreate.price}
-                                        onChange={handleChange('price')} />
+                                    <TextInput id="text-input-id" name="price"
+                                        value={Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(productCreate.price))}
+                                        onChange={handleChangeMasked('price')} />
                                 </FormField>
                                 <FormField name="name" htmlFor="text-input-id" label="Qtd mínima">
                                     <TextInput type="number" id="text-input-id" name="ammountMinimun"
