@@ -12,7 +12,7 @@ const FooterComponent = () => {
             >
                 <Box direction="row" pad='none' align="center" gap="small">
                     <Anchor color="white" size="medium" href="">
-                        @Adoleta arts Todos os direitos
+                        @Adoletarts Todos os direitos
                     </Anchor>
                 </Box>
                 <Clock type="digital" size='large' />

@@ -6,22 +6,14 @@ import Custumer from "../../Models/CustumerModel";
 import NotificationModel from "../../Models/Notification.model";
 import CustumerService from '../../Services/custumer.service'
 import AuthService from '../../Services/auth.service'
+import { MailOption } from "grommet-icons";
 
 
 export const CustumerCreate: Custumer = {
     id: 0,
-<<<<<<< HEAD
-<<<<<<< HEAD
     name: '',
     email: '',
     telephone: '',
-=======
-=======
->>>>>>> c7cea5d (Dasboard feito)
-    name: 'Teste 02',
-    email: 'teste@teste.com',
-    telephone: '11 979993131',
->>>>>>> c7cea5d (Dasboard feito)
 };
 
 export const NotificatioModel: NotificationModel = {
@@ -97,7 +89,7 @@ const CustumerNewPage = () => {
                                 />
                             </FormField>
                             <FormField name="name" htmlFor="text-input-id" label="Email">
-                                <TextInput id="text-input-id" name="name"
+                                <TextInput id="text-input-id" name="name" icon={<MailOption />}
                                     value={custumerCreate.email}
                                     onChange={handleChange('email')} />
                             </FormField>
@@ -106,14 +98,14 @@ const CustumerNewPage = () => {
                                     mask={[
                                         { fixed: '(' },
                                         {
-                                            length: 3,
+                                            length: 2,
                                             regexp: /^[0-9]{1,3}$/,
-                                            placeholder: 'xxx',
+                                            placeholder: 'xx',
                                         },
                                         { fixed: ')' },
                                         { fixed: ' ' },
                                         {
-                                            length: 3,
+                                            length: 4,
                                             regexp: /^[0-9]{1,4}$/,
                                             placeholder: 'xxxx',
                                         },

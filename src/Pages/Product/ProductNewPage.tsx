@@ -6,7 +6,6 @@ import NotificationComponent from "../../Components/notification";
 import NotificationModel from "../../Models/Notification.model";
 import ProductService from '../../Services/product.service'
 import Product from "../../Models/ProductModel";
-import IntlCurrencyInput from "react-intl-currency-input"
 
 export const ProductCreate: Product = {
     id: 0,

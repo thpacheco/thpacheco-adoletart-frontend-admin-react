@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, Form, FormField, Grid, Heading, Page, PageContent, Spinner, Text, TextInput } from "grommet";
+import { Avatar, Box, Button, Card, Form, FormField, Grid, Heading, MaskedInput, Page, PageContent, Spinner, Text, TextInput } from "grommet";
 import { Basket, Compliance, User } from "grommet-icons";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -59,6 +59,8 @@ const CustumerEditPage = () => {
                 setCustumer(response.data)
                 setLoading(false)
                 setNotification({ title: "Sucesso", message: "Cliente atualizado com sucesso", status: `${StatusNotification.SUCCESS}`, })
+                debugger;
+                getCustumerByID(Number(params.id));
             },
             () => {
                 setMsgVisible(true)
@@ -137,9 +139,31 @@ const CustumerEditPage = () => {
                                     onChange={handleChange('email')} />
                             </FormField>
                             <FormField name="name" htmlFor="text-input-id" label="Celular">
-                                <TextInput id="text-input-id" name="telephone"
+                                <MaskedInput
+                                    mask={[
+                                        { fixed: '(' },
+                                        {
+                                            length: 2,
+                                            regexp: /^[0-9]{1,3}$/,
+                                            placeholder: 'xx',
+                                        },
+                                        { fixed: ')' },
+                                        { fixed: ' ' },
+                                        {
+                                            length: 4,
+                                            regexp: /^[0-9]{1,4}$/,
+                                            placeholder: 'xxxx',
+                                        },
+                                        { fixed: '-' },
+                                        {
+                                            length: 4,
+                                            regexp: /^[0-9]{1,4}$/,
+                                            placeholder: 'xxxx',
+                                        },
+                                    ]}
                                     value={custumer.telephone}
-                                    onChange={handleChange('telephone')} />
+                                    onChange={handleChange('telephone')}
+                                />
                             </FormField>
                             <Box direction="row" gap="medium">
                                 {loading ? spinner : <Button type="submit" primary label="Salvar" onClick={() => { updateCustumer() }} />}

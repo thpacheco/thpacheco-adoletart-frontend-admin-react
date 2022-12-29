@@ -21,7 +21,7 @@ const Routers = () => {
     return (
         <Routes>
             <Route element={<Login />}>
-                <Route path="/login" element={<Login />} />
+                <Route path="login/*" element={<Login />} />
             </Route>
             <Route path="/*" element={<Main />}>
                 <Route index element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
