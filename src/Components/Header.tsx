@@ -1,6 +1,8 @@
 import { Anchor, Avatar, Box } from "grommet";
+import { useNavigate } from "react-router-dom";
 
 const HeaderComponent = () => {
+    let navigate = useNavigate();
     return (
         <Box tag="header" background="brand" justify="between" pad="small">
             <Box
@@ -12,7 +14,7 @@ const HeaderComponent = () => {
             >
                 <Box direction="row" pad='none' align="center" gap="small">
                     <Avatar background="dark-1">IRIS</Avatar>
-                    <Anchor color="white" size="xlarge" href="/">
+                    <Anchor color="white" size="xlarge" onClick={() => {navigate('/'); }}>
                         Adoletarts
                     </Anchor>
                 </Box>
