@@ -153,11 +153,6 @@ const CustumerListPage = () => {
                                         primary: true,
                                     },
                                     {
-                                        property: 'email',
-                                        header: <Text>Valor Unitário</Text>,
-                                        primary: true,
-                                    },
-                                    {
                                         property: 'ativo',
                                         render: dataItem => (<Checkmark color="#008000" size='medium' />),
                                         header: <Text>Ativo</Text>,

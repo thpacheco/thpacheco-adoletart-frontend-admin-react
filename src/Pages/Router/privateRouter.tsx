@@ -7,10 +7,10 @@ const isAuth = (): boolean => {
 };
 
 const PrivateRoute: React.FC<any> = ({ redirectPath = '/login', children }) => {
+
     if (!isAuth()) {
         return <Navigate to={redirectPath} replace />;
     }
-    let valueChildren = children ? children : <Outlet />
     return children ? children : <Outlet />;
 };
 

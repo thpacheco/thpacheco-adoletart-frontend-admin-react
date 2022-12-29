@@ -7,6 +7,7 @@ import NotificationModel from "../../Models/Notification.model";
 import CustumerService from '../../Services/custumer.service'
 import AuthService from '../../Services/auth.service'
 import { MailOption } from "grommet-icons";
+import { useNavigate } from "react-router-dom";
 
 
 export const CustumerCreate: Custumer = {
@@ -23,6 +24,7 @@ export const NotificatioModel: NotificationModel = {
 }
 
 const CustumerNewPage = () => {
+    let navigate = useNavigate();
     const [custumerCreate, setCustumerCreate] = useState(CustumerCreate);
     const [notification, setNotification] = useState(NotificatioModel);
     const [msgvisible, setMsgVisible] = useState(false);
@@ -49,6 +51,7 @@ const CustumerNewPage = () => {
                 setNotification({ title: "Sucesso", message: "Cliente cadastrado com sucesso.", status: `${StatusNotification.SUCCESS}`, })
                 setLoading(false);
                 setCustumerCreate(CustumerCreate)
+                navigate('/custumers');
             }
             , () => {
                 setMsgVisible(true);
