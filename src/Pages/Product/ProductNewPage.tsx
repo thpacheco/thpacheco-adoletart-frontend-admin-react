@@ -1,15 +1,17 @@
 import { useState } from "react";
+import MaskedInput from 'react-text-mask'
 import { Page, PageContent, Button, Box, Form, FormField, TextInput, Text, Notification, Spinner } from "grommet";
 import { StatusNotification } from "../../Common/Enum/StatusNotificarion";
 import NotificationComponent from "../../Components/notification";
 import NotificationModel from "../../Models/Notification.model";
 import ProductService from '../../Services/product.service'
 import Product from "../../Models/ProductModel";
+import IntlCurrencyInput from "react-intl-currency-input"
 
 export const ProductCreate: Product = {
     id: 0,
     name: '',
-    price: 10.65,
+    price: 0,
     ammount: 0,
     ammountMinimun: 0,
     ammountCharged: 0,
@@ -39,30 +41,52 @@ const ProductNewPage = () => {
             { side: 'left', color: '#6FFFB0', size: 'medium' },
         ]}
     />;
-
+    const numberFormat = (value: any) => {
+        if (isNaN(value) === false) {
+            let n = new Intl.NumberFormat("pt-BR", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2,
+            }).format(value);
+            debugger
+            if (String(value).includes(".") && !n.includes(".")) {
+                return n + ".";
+            }
+            return "R$" + n;
+        }
+        return "0";
+    }
     const handleChangeMasked = (prop: keyof any) => async (event: React.ChangeEvent<{ value: unknown }>) => {
-
-        const money = String(event.target.value);
-        const formatCurrency = _formatCurrency(money);
         debugger;
-        const moneyMask = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(10.99)
-        setProductCreate({ ...productCreate, [prop]: formatCurrency });
+        var valueInitial = "0";
+        const [formattedWholeValue, decimalValue = "0"] = String(event.target.value).split(".");
+        const signifantValue = formattedWholeValue.replace(/,/g, "");
+        const floatValue = parseFloat(signifantValue + "," + decimalValue.slice(0, 2));
+
+        valueInitial = numberFormat(floatValue);
+
+        const { value = "" } = event.target;
+        const money = String(event.target.value);
+        var split = money.replace(/,/g, '.');
+        const parsedValue = money.replace(/[^\d.]/gi, "");
+        const digitMoney3 = Number(split.replace(/[^0-9\.]+/g, ""));
+        const formatCurrency = _formatCurrency(money);
+        const moneyMask = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(formatCurrency))
+        setProductCreate({ ...productCreate, [prop]: valueInitial });
     };
 
     const _formatCurrency = (amount: any) => {
-        debugger
         amount = amount.replace(/(\d)(?=(\d{3})+(\.(\d){0,2})*$)/g, '$1,');
 
         if (amount.indexOf(',') === -1)
             return amount + '.00';
 
         var decimals = amount.split(',')[1];
-        
+
         const valueFinal = decimals.length < 2 ? amount : amount;
 
         var split = valueFinal.replace(/,/g, '.');
 
-        const digitMoney3 = Number(split.replace(/[^0-9\.]+/g,""));
+        const digitMoney3 = Number(split.replace(/[^0-9\.]+/g, ""));
 
         return digitMoney3;
     };
@@ -127,8 +151,12 @@ const ProductNewPage = () => {
                             >
                                 <FormField name="name" htmlFor="text-input-id" label="Preço">
                                     <TextInput id="text-input-id" name="price"
-                                        value={Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(productCreate.price))}
+                                        type="text"
+                                        value={productCreate.price}
                                         onChange={handleChangeMasked('price')} />
+                                    <MaskedInput id="text-input-id"
+                                        mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                                    />
                                 </FormField>
                                 <FormField name="name" htmlFor="text-input-id" label="Qtd mínima">
                                     <TextInput type="number" id="text-input-id" name="ammountMinimun"
