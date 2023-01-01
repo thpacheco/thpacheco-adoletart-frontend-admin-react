@@ -1,5 +1,5 @@
 import { useState } from "react";
-import MaskedInput from 'react-text-mask'
+import CurrencyInput from "react-currency-input-field";
 import { Page, PageContent, Button, Box, Form, FormField, TextInput, Text, Notification, Spinner } from "grommet";
 import { StatusNotification } from "../../Common/Enum/StatusNotificarion";
 import NotificationComponent from "../../Components/notification";
@@ -50,28 +50,29 @@ const ProductNewPage = () => {
             if (String(value).includes(".") && !n.includes(".")) {
                 return n + ".";
             }
-            return "R$" + n;
+            return n;
         }
         return "0";
     }
-    const handleChangeMasked = (prop: keyof any) => async (event: React.ChangeEvent<{ value: unknown }>) => {
-        debugger;
-        var valueInitial = "0";
-        const [formattedWholeValue, decimalValue = "0"] = String(event.target.value).split(".");
-        const signifantValue = formattedWholeValue.replace(/,/g, "");
-        const floatValue = parseFloat(signifantValue + "," + decimalValue.slice(0, 2));
+    const handleChangeMasked = (value: any, name: string) => {
 
-        valueInitial = numberFormat(floatValue);
 
-        const { value = "" } = event.target;
-        const money = String(event.target.value);
-        var split = money.replace(/,/g, '.');
-        const parsedValue = money.replace(/[^\d.]/gi, "");
-        const digitMoney3 = Number(split.replace(/[^0-9\.]+/g, ""));
-        const formatCurrency = _formatCurrency(money);
-        const moneyMask = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(formatCurrency))
-        setProductCreate({ ...productCreate, [prop]: valueInitial });
+        // valueInitial = numberFormat(floatValue);
+
+        // const { value = "" } = event.target;
+        // const money = String(event.target.value);
+        // var split = money.replace(/,/g, '.');
+        // const parsedValue = money.replace(/[^\d.]/gi, "");
+        // const digitMoney3 = Number(split.replace(/[^0-9\.]+/g, ""));
+        // const formatCurrency = _formatCurrency(money);
+        // const moneyMask = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(formatCurrency))
+
+        setProductCreate({ ...productCreate, [name]: value });
     };
+
+    const FormatCurrency = (value: Number): Number => {
+        return Number(value.toString().replace(/,/g, '.'));
+    }
 
     const _formatCurrency = (amount: any) => {
         amount = amount.replace(/(\d)(?=(\d{3})+(\.(\d){0,2})*$)/g, '$1,');
@@ -96,8 +97,13 @@ const ProductNewPage = () => {
 
 
     const SalveNewProduct = () => {
-        debugger
-        const objCreate: Product = { ...productCreate, price: Number(productCreate.price), ammount: Number(productCreate.ammount), ammountCharged: Number(productCreate.ammountCharged), ammountMinimun: Number(productCreate.ammountMinimun) };
+        const objCreate: Product =
+        {
+            ...productCreate,
+            price: Number(FormatCurrency(productCreate.price)),
+            ammountCharged: Number(FormatCurrency(productCreate.ammountCharged)),
+            ammountMinimun: Number(FormatCurrency(productCreate.ammountMinimun))
+        };
         setLoading(true);
         ProductService.createNewProduct(objCreate).then(
             () => {
@@ -138,8 +144,8 @@ const ProductNewPage = () => {
                             onReset={() => setProductCreate(productCreate)}
                             onSubmit={() => { SalveNewProduct() }}
                         >
-                            <FormField required={{ indicator: false }} name="name" htmlFor="text-input-id" label="Nome">
-                                <TextInput id="text-input-id" name="name"
+                            <FormField required={{ indicator: false }} name="name" label="Nome">
+                                <TextInput name="name"
                                     value={productCreate.name}
                                     onChange={handleChange('name')}
                                 />
@@ -148,38 +154,28 @@ const ProductNewPage = () => {
                                 direction="row"
                                 justify="between"
                             >
-                                <FormField name="name" htmlFor="text-input-id" label="Preço">
-                                    <TextInput id="text-input-id" name="price"
-                                        type="text"
-                                        value={productCreate.price}
-                                        onChange={handleChangeMasked('price')} />
-                                    <MaskedInput id="text-input-id"
-                                        mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-                                    />
+                                <FormField name="preco" label="Preço">
+                                    <CurrencyInput name="price" type="text" customInput={TextInput} value={productCreate.price} onValueChange={(value) => { handleChangeMasked(value, "price") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
                                 </FormField>
                                 <FormField name="name" htmlFor="text-input-id" label="Qtd mínima">
-                                    <TextInput type="number" id="text-input-id" name="ammountMinimun"
-                                        value={productCreate.ammountMinimun}
-                                        onChange={handleChange('ammountMinimun')} />
+                                    <CurrencyInput name="ammountMinimun" type="text" customInput={TextInput} value={productCreate.ammountMinimun} onValueChange={(value) => { handleChangeMasked(value, "ammountMinimun") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
                                 </FormField>
                             </Box>
                             <Box
                                 direction="row"
                                 justify="between"
                             >
-                                <FormField name="name" htmlFor="text-input-id" label="Valores a serem cobrados">
-                                    <TextInput type="number" id="text-input-id" name="ammountCharged"
-                                        value={productCreate.ammountCharged}
-                                        onChange={handleChange('ammountCharged')} />
+                                <FormField name="name" htmlFor="text-input-id" label="Valor a ser cobrado">
+                                    <CurrencyInput name="ammountCharged" type="text" customInput={TextInput} value={productCreate.ammountCharged} onValueChange={(value) => { handleChangeMasked(value, "ammountCharged") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
                                 </FormField>
                             </Box>
 
-                            <FormField name="name" htmlFor="text-input-id" label="Obervação">
+                            <FormField name="name" htmlFor="text-input-id" label="Descrição">
                                 <TextInput id="text-input-id" name="description"
                                     value={productCreate.description}
                                     onChange={handleChange('description')} />
                             </FormField>
-                            <Box direction="row" gap="medium">
+                            <Box direction="row-reverse" gap="medium" alignSelf="end">
                                 {loading ? spinner : <Button type="submit" primary label="Salvar" />}
                                 <Button type="reset" label="Limpar" />
                             </Box>

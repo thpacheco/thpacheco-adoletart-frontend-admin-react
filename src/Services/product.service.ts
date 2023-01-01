@@ -2,7 +2,7 @@ import axios from "axios";
 import AuthHelper from "../Common/AuthHelper";
 import Custumer from "../Models/CustumerModel";
 import Product from "../Models/ProductModel";
-// const API_URL = "https://localhost:8080/api/";
+// const API_URL = "https://localhost:7043/v1/api/";
 const API_URL = "https://api.adoletarts.com.br/v1/api/";
 
 const header = {
@@ -36,7 +36,7 @@ class ProductService {
     }
 
     listAllProducts() {
-        return axios.get(API_URL + "product/", header)
+        return axios.get(API_URL + "product", header)
             .then(response => {
                 return response.data
             })

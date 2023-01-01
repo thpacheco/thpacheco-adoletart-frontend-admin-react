@@ -5,7 +5,6 @@ import NotificationComponent from "../../Components/notification";
 import Custumer from "../../Models/CustumerModel";
 import NotificationModel from "../../Models/Notification.model";
 import CustumerService from '../../Services/custumer.service'
-import AuthService from '../../Services/auth.service'
 import { MailOption } from "grommet-icons";
 import { useNavigate } from "react-router-dom";
 
@@ -123,7 +122,7 @@ const CustumerNewPage = () => {
                                     onChange={handleChange('telephone')}
                                 />
                             </FormField>
-                            <Box direction="row" gap="medium">
+                            <Box direction="row-reverse" gap="medium">
                                 {loading ? spinner : <Button type="submit" primary label="Salvar" />}
                                 <Button type="reset" label="Limpar" />
                             </Box>
