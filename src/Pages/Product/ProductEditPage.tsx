@@ -1,4 +1,5 @@
 import { Avatar, Box, Button, Card, Form, FormField, Grid, Heading, Page, PageContent, Spinner, Text, TextInput } from "grommet";
+import CurrencyInput from "react-currency-input-field";
 import { Basket, Compliance, Package, User } from "grommet-icons";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -15,7 +16,7 @@ export const editProduct: Product = {
     price: 0,
     ammount: 0,
     ammountMinimun: 0,
-    ammountCharged: 0,
+    ammount_charged: 0,
     description: ''
 };
 export const NotificatioModel: NotificationModel = {
@@ -53,11 +54,14 @@ const ProductEditPage = () => {
                 setProduct(response.data)
             });
     }
+    const FormatCurrency = (value: Number): Number => {
+        return Number(value.toString().replace(/,/g, '.'));
+    }
+
     const updateCustumer = () => {
         setLoading(true);
         const id = Number(params.id)
-        const objProductEdit: Product = { ...product, price: Number(product.price), ammountMinimun: Number(product.ammountMinimun), ammountCharged: Number(product.ammountCharged) }
-        debugger
+        const objProductEdit: Product = { ...product, price: Number(FormatCurrency(product.price)), ammount_charged: Number(FormatCurrency(product.ammount_charged)) }
         ProductService.updateProduct(id, objProductEdit).then(
             (response) => {
                 setMsgVisible(true)
@@ -72,6 +76,10 @@ const ProductEditPage = () => {
             }
         );
     }
+
+    const handleChangeMasked = (value: any, name: string) => {
+        setProduct({ ...product, [name]: value });
+    };
 
     const CloseNotification = () => {
         setMsgVisible(false);
@@ -108,34 +116,36 @@ const ProductEditPage = () => {
                             </Box>
                             <Box>
                                 <Box direction="row" pad='small'>
-                                    <Text weight='bold' color='white' margin={{ left: '5px' }}>Nome Produto: </Text>
+                                    <Text weight='bold' color='#6FFFB0' margin={{ left: '5px' }}>Nome Produto: </Text>
                                     <Text color='white' margin={{ left: '5px' }}>{product.name}</Text>
                                 </Box>
                             </Box>
                             <Box>
                                 <Box direction="row" pad='small'>
-                                    <Text weight='bold' color='white' margin={{ left: '5px' }}>Qtd mínima: </Text>
-                                    <Text color='white' margin={{ left: '5px' }}>{Number(product.ammountMinimun)?.toLocaleString('pt-BR', formato)}</Text>
+                                    <Text weight='bold' color='#6FFFB0' margin={{ left: '5px' }}>Quantidade: </Text>
+                                    <Text color='white' margin={{ left: '5px' }}>{product.ammount}</Text>
                                 </Box>
                             </Box>
                             <Box>
                                 <Box direction="row" pad='small'>
-                                    <Text weight='bold' color='white' margin={{ left: '5px' }}>Valor Item: </Text>
-                                    <Text color='white' margin={{ left: '5px' }}>{Number(product.price).toLocaleString('pt-BR', formato)}</Text>
+                                    <Text weight='bold' color='#6FFFB0' margin={{ left: '5px' }}>Valor Item: </Text>
+                                    <Text color='white' margin={{ left: '5px' }}>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price)}</Text>
                                 </Box>
                             </Box>
                             <Box>
                                 <Box direction="row" pad='small'>
-                                    <Text weight='bold' color='white' margin={{ left: '5px' }}>Valor Cobrado: </Text>
-                                    <Text color='white' margin={{ left: '5px' }}>{Number(product.ammountCharged).toLocaleString('pt-BR', formato)}</Text>
+                                    <Text weight='bold' color='#6FFFB0' margin={{ left: '5px' }}>Valor Cobrado: </Text>
+                                    <Text color='white' margin={{ left: '5px' }}>{Number(product.ammount_charged).toLocaleString('pt-BR', formato)}</Text>
                                 </Box>
                             </Box>
-                            <Box>
-                                <Box direction="row" pad='small'>
-                                    <Text weight='bold' color='white' margin={{ left: '5px' }}>Descrição: </Text>
-                                    <Text color='white' margin={{ left: '5px' }}>{product.description}</Text>
+                            {product.description &&
+                                <Box>
+                                    <Box direction="row" pad='small'>
+                                        <Text weight='bold' color='#6FFFB0' margin={{ left: '5px' }}>Descrição: </Text>
+                                        <Text color='white' margin={{ left: '5px' }}>{product.description}</Text>
+                                    </Box>
                                 </Box>
-                            </Box>
+                            }
                         </Box>
                     </Box>
                     <Box gridArea="main" pad='small' background="#2c2828">
@@ -145,44 +155,37 @@ const ProductEditPage = () => {
                             onReset={() => setValue({})}
                             onSubmit={({ value }) => { }}
                         >
-                            <FormField required={{ indicator: false }} name="name" htmlFor="text-input-id" label="Nome">
-                                <TextInput id="text-input-id" name="name"
+                            <Box gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Nome</Text>
+                                <TextInput name="name"
                                     value={product.name}
                                     onChange={handleChange('name')}
                                 />
-                            </FormField>
-                            <Box
-                                direction="row"
-                                justify="between"
-                            >
-                                <FormField name="name" htmlFor="text-input-id" label="Preço">
-                                    <TextInput type="number" id="text-input-id" name="price"
-                                        value={product.price}
-                                        onChange={handleChange('price')} />
-                                </FormField>
-                                <FormField name="name" htmlFor="text-input-id" label="Qtd mínima">
-                                    <TextInput type="number" id="text-input-id" name="ammountMinimun"
-                                        value={product.ammountMinimun}
-                                        onChange={handleChange('ammountMinimun')} />
-                                </FormField>
                             </Box>
-                            <Box
-                                direction="row"
-                                justify="between"
-                            >
-                                <FormField name="name" htmlFor="text-input-id" label="Valores a serem cobrados">
-                                    <TextInput type="number" id="text-input-id" name="ammountCharged"
-                                        value={product.ammountCharged}
-                                        onChange={handleChange('ammountCharged')} />
-                                </FormField>
+                            <Box direction="row" justify="between">
+                                <Box direction="column" gap="small" pad="xsmall">
+                                    <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor Item</Text>
+                                    <CurrencyInput name="price" type="text" customInput={TextInput} value={product.price} onValueChange={(value) => { handleChangeMasked(value, "price") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
+                                </Box>
+
+                                <Box direction="column" gap="small" pad="xsmall">
+                                    <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor cobrado</Text>
+                                    <CurrencyInput customInput={TextInput} value={product.ammount_charged} onValueChange={(value) => { handleChangeMasked(value, "ammount_charged") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
+                                </Box>
+                            </Box>
+                            <Box direction="column" gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Quantidade</Text>
+                                <TextInput value={product.ammount} onChange={handleChange("ammount")} />
                             </Box>
 
-                            <FormField name="name" htmlFor="text-input-id" label="Obervação">
+                            <Box direction="column" gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Descrição</Text>
                                 <TextInput id="text-input-id" name="description"
                                     value={product.description}
                                     onChange={handleChange('description')} />
-                            </FormField>
-                            <Box direction="row" gap="medium">
+                            </Box>
+
+                            <Box direction="row-reverse" gap="medium" alignSelf="end" pad="xsmall">
                                 {loading ? spinner : <Button type="submit" primary label="Salvar" onClick={() => { updateCustumer() }} />}
                                 <Button type="reset" label="Limpar" onClick={() => { }} />
                             </Box>
