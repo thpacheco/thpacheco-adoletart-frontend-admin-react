@@ -19,11 +19,11 @@ const SidebarComponet = () => {
                         icon={<Group color='white' size='medium' />} />
                     <Anchor size="1.2em" onClick={() => { navigate('/products'); }} label="Produtos" key=""
                         icon={<Package color='white' size='medium' />} />
-                    <Anchor onClick={() => { navigate('/budget'); }} label="Orçamento"
+                    <Anchor size="1.2em" onClick={() => { navigate('/budget'); }} label="Orçamento"
                         icon={<Currency color='white' size='medium' />} />
-                    <Anchor onClick={() => { navigate('/'); }} label="Pedidos" key=""
+                    <Anchor size="1.2em" onClick={() => { navigate('/'); }} label="Pedidos" key=""
                         icon={<Cart color='white' size='medium' />} />
-                    <Anchor onClick={() => { navigate('/'); }} label="Relatórios" key=""
+                    <Anchor size="1.2em" onClick={() => { navigate('/'); }} label="Relatórios" key=""
                         icon={<Compliance color='white' size='medium' />} />
                 </Nav>
             </Sidebar>

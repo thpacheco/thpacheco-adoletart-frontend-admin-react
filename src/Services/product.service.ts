@@ -17,7 +17,7 @@ const header = {
 class ProductService {
     createNewProduct(objCreate: Product) {
         return axios
-            .post(API_URL + "product/", objCreate, header)
+            .post(API_URL + "product", objCreate, header)
             .then(response => {
                 if (response.data) {
                 }

@@ -68,6 +68,7 @@ const ProductEditPage = () => {
                 setProduct(response.data)
                 setLoading(false)
                 setNotification({ title: "Sucesso", message: "Cliente atualizado com sucesso", status: `${StatusNotification.SUCCESS}`, })
+                getCustumerByID(Number(params.id));
             },
             () => {
                 setMsgVisible(true)

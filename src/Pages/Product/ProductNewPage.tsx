@@ -8,6 +8,7 @@ import NotificationModel from "../../Models/Notification.model";
 import ProductService from '../../Services/product.service'
 import Product from "../../Models/ProductModel";
 import { deepMerge } from "grommet/utils";
+import { useNavigate } from "react-router-dom";
 
 export const ProductCreate: Product = {
     id: 0,
@@ -26,6 +27,7 @@ export const NotificatioModel: NotificationModel = {
 }
 
 const ProductNewPage = () => {
+    let navigate = useNavigate();
     const [productCreate, setProductCreate] = useState(ProductCreate);
     const [notification, setNotification] = useState(NotificatioModel);
     const [msgvisible, setMsgVisible] = useState(false);
@@ -124,6 +126,7 @@ const ProductNewPage = () => {
                 setNotification({ title: "Sucesso", message: "Cliente cadastrado com sucesso.", status: `${StatusNotification.SUCCESS}`, })
                 setLoading(false);
                 setProductCreate(ProductCreate)
+                navigate('/products');
             }
             , () => {
                 setMsgVisible(true);

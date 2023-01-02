@@ -26,7 +26,7 @@ class CustumerService {
     updateCustumer(id: number, objCreate: Custumer) {
         console.log(header);
         return axios
-            .put(API_URL + "custumer/" + id, objCreate, header)
+            .put(API_URL + "custumer" + id, objCreate, header)
             .then(response => {
                 if (response.data) {
                 }
@@ -35,7 +35,7 @@ class CustumerService {
     }
 
     listAllCustumers() {
-        return axios.get(API_URL + "custumer/", header)
+        return axios.get(API_URL + "custumer", header)
             .then(response => {
                 return response.data
             })

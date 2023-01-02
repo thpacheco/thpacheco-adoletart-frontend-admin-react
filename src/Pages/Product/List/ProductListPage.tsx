@@ -173,6 +173,11 @@ const ProductListPage = () => {
                                     primary: true,
                                 },
                                 {
+                                    property: 'description',
+                                    header: <Text>Descrição</Text>,
+                                    primary: true,
+                                },
+                                {
                                     property: '',
                                     render: (dataItem) => (<Button
                                         a11yTitle="100 Filters Applied"
