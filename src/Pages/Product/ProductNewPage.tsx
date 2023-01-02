@@ -1,11 +1,13 @@
 import { useState } from "react";
 import CurrencyInput from "react-currency-input-field";
-import { Page, PageContent, Button, Box, Form, FormField, TextInput, Text, Notification, Spinner } from "grommet";
+import { Page, PageContent, Button, Box, Form, FormField, TextInput, Text, Notification, Spinner, Grommet } from "grommet";
+import { grommet, ThemeType } from 'grommet/themes';
 import { StatusNotification } from "../../Common/Enum/StatusNotificarion";
 import NotificationComponent from "../../Components/notification";
 import NotificationModel from "../../Models/Notification.model";
 import ProductService from '../../Services/product.service'
 import Product from "../../Models/ProductModel";
+import { deepMerge } from "grommet/utils";
 
 export const ProductCreate: Product = {
     id: 0,
@@ -13,7 +15,7 @@ export const ProductCreate: Product = {
     price: 0,
     ammount: 0,
     ammountMinimun: 0,
-    ammountCharged: 0,
+    ammount_charged: 0,
     description: ''
 };
 
@@ -94,14 +96,25 @@ const ProductNewPage = () => {
     // const FloatConvertMoney = () => {
     //     var number = Number(currency.replace(/[^0-9\.]+/g,""));
     // }
-
+    const customTheme: ThemeType = {
+        formField: {
+            label: {
+                color: '#6FFFB0',
+                size: 'medium',
+                margin: { vertical: '0', bottom: 'small', horizontal: '0' },
+                weight: 'bold',
+            },
+            border: false,
+            margin: '0',
+        },
+    };
 
     const SalveNewProduct = () => {
         const objCreate: Product =
         {
             ...productCreate,
             price: Number(FormatCurrency(productCreate.price)),
-            ammountCharged: Number(FormatCurrency(productCreate.ammountCharged)),
+            ammount_charged: Number(FormatCurrency(productCreate.ammount_charged)),
             ammountMinimun: Number(FormatCurrency(productCreate.ammountMinimun))
         };
         setLoading(true);
@@ -124,7 +137,7 @@ const ProductNewPage = () => {
     }
 
     return (
-        <Page fill>
+        <Page fill >
             <PageContent fill pad='xsmall' >
                 {msgvisible && (
                     <NotificationComponent title={notification.title} message={notification.message} status={notification.status} onCloseNotification={CloseNotification}></NotificationComponent>
@@ -134,48 +147,45 @@ const ProductNewPage = () => {
                     direction="row"
                     align="center"
                     justify="between"
-                    pad={{ horizontal: 'medium', vertical: 'small' }}
+                    pad={{ horizontal: '2em', vertical: 'auto' }}
                 >
-                    <Text weight='bold' size="1.4em" color='white' >Cadastro de produtos</Text>
+                    <Text weight='bold' size="1.4em" color="#6FFFB0">Cadastro de produtos</Text>
                 </Box>
-                <Box gridArea="main" flex pad='medium'>
+                <Box gridArea="main" flex pad='xsmall' >
                     <Box pad='medium' width="large">
-                        <Form
-                            onReset={() => setProductCreate(productCreate)}
-                            onSubmit={() => { SalveNewProduct() }}
-                        >
-                            <FormField required={{ indicator: false }} name="name" label="Nome">
+                        <Form onReset={() => setProductCreate(productCreate)} onSubmit={() => { SalveNewProduct() }}>
+                            <Box gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Nome</Text>
                                 <TextInput name="name"
                                     value={productCreate.name}
                                     onChange={handleChange('name')}
                                 />
-                            </FormField>
-                            <Box
-                                direction="row"
-                                justify="between"
-                            >
-                                <FormField name="preco" label="Preço">
-                                    <CurrencyInput name="price" type="text" customInput={TextInput} value={productCreate.price} onValueChange={(value) => { handleChangeMasked(value, "price") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
-                                </FormField>
-                                <FormField name="name" htmlFor="text-input-id" label="Qtd mínima">
-                                    <CurrencyInput name="ammountMinimun" type="text" customInput={TextInput} value={productCreate.ammountMinimun} onValueChange={(value) => { handleChangeMasked(value, "ammountMinimun") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
-                                </FormField>
                             </Box>
-                            <Box
-                                direction="row"
-                                justify="between"
-                            >
-                                <FormField name="name" htmlFor="text-input-id" label="Valor a ser cobrado">
-                                    <CurrencyInput name="ammountCharged" type="text" customInput={TextInput} value={productCreate.ammountCharged} onValueChange={(value) => { handleChangeMasked(value, "ammountCharged") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
-                                </FormField>
+                            <Box direction="row" justify="between">
+                                <Box direction="column" gap="small" pad="xsmall">
+                                    <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor Item</Text>
+                                    <CurrencyInput name="price" type="text" customInput={TextInput} value={productCreate.price} onValueChange={(value) => { handleChangeMasked(value, "price") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
+                                </Box>
+
+                                <Box direction="column" gap="small" pad="xsmall">
+                                    <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor cobrado</Text>
+                                    <CurrencyInput customInput={TextInput} value={productCreate.ammount_charged} onValueChange={(value) => { handleChangeMasked(value, "ammount_charged") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
+                                </Box>
                             </Box>
 
-                            <FormField name="name" htmlFor="text-input-id" label="Descrição">
+                            <Box direction="column" gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Quantidade</Text>
+                                <TextInput value={productCreate.ammount} onChange={handleChange("ammount")} />
+                            </Box>
+
+                            <Box direction="column" gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Descrição</Text>
                                 <TextInput id="text-input-id" name="description"
                                     value={productCreate.description}
                                     onChange={handleChange('description')} />
-                            </FormField>
-                            <Box direction="row-reverse" gap="medium" alignSelf="end">
+                            </Box>
+
+                            <Box direction="row-reverse" gap="medium" alignSelf="end" pad="xsmall">
                                 {loading ? spinner : <Button type="submit" primary label="Salvar" />}
                                 <Button type="reset" label="Limpar" />
                             </Box>

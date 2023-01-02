@@ -84,18 +84,21 @@ const CustumerNewPage = () => {
                             onReset={() => setCustumerCreate(CustumerCreate)}
                             onSubmit={() => { SalveNewCustumer() }}
                         >
-                            <FormField name="name" htmlFor="text-input-id" label="Nome">
-                                <TextInput id="text-input-id" name="name"
+                            <Box gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Nome</Text>
+                                <TextInput name="name"
                                     value={custumerCreate.name}
                                     onChange={handleChange('name')}
                                 />
-                            </FormField>
-                            <FormField name="name" htmlFor="text-input-id" label="Email">
-                                <TextInput id="text-input-id" name="name" icon={<MailOption />}
+                            </Box>
+                            <Box gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">E-mail</Text>
+                                <TextInput id="text-input-id" name="name" icon={<MailOption color="#6FFFB0" />}
                                     value={custumerCreate.email}
                                     onChange={handleChange('email')} />
-                            </FormField>
-                            <FormField name="name" htmlFor="text-input-id" label="Celular">
+                            </Box>
+                            <Box gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">E-mail</Text>
                                 <MaskedInput
                                     mask={[
                                         { fixed: '(' },
@@ -121,8 +124,8 @@ const CustumerNewPage = () => {
                                     value={custumerCreate.telephone}
                                     onChange={handleChange('telephone')}
                                 />
-                            </FormField>
-                            <Box direction="row-reverse" gap="medium">
+                            </Box>
+                            <Box direction="row-reverse" gap="medium" pad="xsmall">
                                 {loading ? spinner : <Button type="submit" primary label="Salvar" />}
                                 <Button type="reset" label="Limpar" />
                             </Box>

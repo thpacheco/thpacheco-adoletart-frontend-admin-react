@@ -7,7 +7,7 @@ const API_URL = "https://api.adoletarts.com.br/v1/api/";
 
 const header = {
     headers: {
-        Authorization: `${AuthHelper.getToken()}`,
+        Authorization: 'Bearer ' + `${AuthHelper.getToken()}`,
         "Content-Type" : "application/json",
         "Access-Control-Allow-Headers" : "Content-Type",
         "Access-Control-Allow-Origin": "*"

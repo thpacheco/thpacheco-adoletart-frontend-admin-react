@@ -4,6 +4,6 @@ export default interface Product {
     price: number,
     ammount: number,
     ammountMinimun:number,
-    ammountCharged:number,
+    ammount_charged:number,
     description:string,
 };

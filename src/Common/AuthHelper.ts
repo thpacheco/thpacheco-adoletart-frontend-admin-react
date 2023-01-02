@@ -16,7 +16,7 @@ export default class AuthHelper {
     public static isAutenticed(): boolean {
         const localItem = localStorage.getItem('accessToken');
         if (localItem === null) return false;
-      
+
         const token = JSON.parse(localItem!) as JwtData
         if (token.data.token !== null) {
             const decoded = jwtDecode<JwtPayload>(token.data.token);
@@ -38,6 +38,10 @@ export default class AuthHelper {
             }
         }
         return '';
+    }
+
+    public static ClearSession(): void {
+        localStorage.clear();
     }
 
     public static getToken(): string {

@@ -1,8 +1,19 @@
-import { Anchor, Avatar, Box } from "grommet";
+import { Anchor, Avatar, Box, Menu } from "grommet";
+import { Menu as MenuIcons } from "grommet-icons";
 import { useNavigate } from "react-router-dom";
+import AuthHelper from "../Common/AuthHelper";
+
+
 
 const HeaderComponent = () => {
     let navigate = useNavigate();
+
+    const isAuth = () => {
+        debugger;
+        AuthHelper.ClearSession();
+        navigate('/login')
+    };
+
     return (
         <Box tag="header" background="brand" justify="between" pad="small">
             <Box
@@ -14,9 +25,22 @@ const HeaderComponent = () => {
             >
                 <Box direction="row" pad='none' align="center" gap="small">
                     <Avatar background="dark-1">IRIS</Avatar>
-                    <Anchor color="white" size="xlarge" onClick={() => {navigate('/'); }}>
+                    <Anchor color="white" size="xlarge" onClick={() => { navigate('/'); }}>
                         Adoletarts
                     </Anchor>
+                </Box>
+                <Box justify="end">
+                    <Menu
+                        a11yTitle="Navigation Menu"
+                        dropProps={{ align: { top: 'bottom', right: 'right' } }}
+                        icon={<MenuIcons color='white' size='medium' />}
+                        items={[
+                            {
+                                label: <Box pad="small">Sair</Box>,
+                                onClick: () => { isAuth(); }
+                            },
+                        ]}
+                    />
                 </Box>
             </Box>
         </Box>

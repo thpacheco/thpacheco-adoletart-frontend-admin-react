@@ -15,7 +15,7 @@ export const products: Product = {
     price: 0,
     ammount: 0,
     ammountMinimun: 0,
-    ammountCharged: 0,
+    ammount_charged: 0,
     description: ''
 };
 export const NotificatioModel: NotificationModel = {
@@ -155,21 +155,21 @@ const ProductListPage = () => {
                                     sortable: true
                                 },
                                 {
+                                    property: 'ammount',
+                                    header: <Text>Quantidade</Text>,
+                                    render: (item) => item.ammount,
+                                    primary: true,
+                                },
+                                {
                                     property: 'price',
-                                    header: <Text>Preço</Text>,
                                     render: (item) => getCurruencyFormart(item.price),
+                                    header: <Text>Valor Item</Text>,
                                     primary: true,
                                 },
                                 {
-                                    property: 'ammountMinimun',
-                                    render: (item) => getCurruencyFormart(item.ammountMinimun),
-                                    header: <Text>Valor Unitário</Text>,
-                                    primary: true,
-                                },
-                                {
-                                    property: 'ammountCharged',
-                                    render: (item) => getCurruencyFormart(item.ammountCharged),
-                                    header: <Text>Valor Unitário</Text>,
+                                    property: 'ammount_charged',
+                                    render: (item) => getCurruencyFormart(item.ammount_charged),
+                                    header: <Text>Valor cobrado</Text>,
                                     primary: true,
                                 },
                                 {
