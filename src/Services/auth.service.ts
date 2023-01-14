@@ -1,6 +1,7 @@
 import axios from "axios";
 const API_URL = "https://api.adoletarts.com.br/v1/api/";
-// const API_URL = "https://localhost:7043/v1/api/";
+// const API_URL = `${process.env.REACT_APP_API_URL}`;
+
 
 let axiosConfig = {
     headers: {

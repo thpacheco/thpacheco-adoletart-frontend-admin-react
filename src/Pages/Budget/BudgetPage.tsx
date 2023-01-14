@@ -1,6 +1,8 @@
 import { Avatar, Box, Button, Card, DataTable, Form, FormField, Grid, Heading, Meter, Page, PageContent, Text, TextInput } from "grommet";
 import { User } from "grommet-icons";
 import { useEffect, useState } from "react";
+import Product from "../../Models/ProductModel";
+import ProductService from '../../Services/product.service'
 
 export const dataBudgetDefault = {
     idBudGet: 0,
@@ -8,6 +10,15 @@ export const dataBudgetDefault = {
     quantidade: 0,
     valorUnitario: 0,
     valor: 0
+};
+export const products: Product = {
+    id: 0,
+    name: '',
+    price: 0,
+    ammount: 0,
+    ammountMinimun: 0,
+    ammount_charged: 0,
+    description: ''
 };
 
 const amountFormatter = new Intl.NumberFormat('pt-BR', {
@@ -19,16 +30,43 @@ const amountFormatter = new Intl.NumberFormat('pt-BR', {
 const BudgetPage = () => {
     const [dataBudget, setdataBudget] = useState(dataBudgetDefault);
     const [listBudget, setlistBudget] = useState([dataBudgetDefault]);
+    const [listProducts, setListProducts] = useState([products]);
+    const [listProductsSuggestion, setlistProductsSuggestion] = useState(listProducts);
 
     useEffect(() => {
         setlistBudget(() => [...[]]);
+        getListAllProducts();
     }, []);
 
-    const handleChange = (prop: keyof any) => async (event: React.ChangeEvent<{ value: unknown }>) =>
+    const getListAllProducts = () => {
+        ProductService.listAllProducts().then((response: any) => {
+            setListProducts(response.data)
+        });
+    }
+
+    const onChange = (event: any) => {
+        debugger
+        const nextValue = event.target.value;
+
+        setdataBudget({ ...dataBudget, ['item']: nextValue });
+
+        if (!nextValue) setlistProductsSuggestion(listProducts);
+        else {
+            setlistProductsSuggestion(listProducts.filter((s) => s.name));
+        }
+    };
+
+    const handleChange = (prop: keyof any) => async (event: React.ChangeEvent<{ value: unknown }>) => {
         setdataBudget({ ...dataBudget, [prop]: event.target.value });
+    }
 
     const addBudget = () => {
         setlistBudget(listBudget => [...listBudget, dataBudget]);
+    };
+
+    const onSuggestionSelect = (event: any) => {
+        debugger
+        setdataBudget({ ...dataBudget, ['item']: event.suggestion });
     };
 
     return (
@@ -45,50 +83,53 @@ const BudgetPage = () => {
                     ]}
                 >
                     <Box
-                    gridArea="header"
-                    direction="row"
-                    align="center"
-                    justify="between"
-                    pad={{ horizontal: 'medium', vertical: 'small' }}
-                    
-                >
-                    <Text weight='bold' size="1.4em" color='white' >Orçamentos</Text>
-                </Box>
+                        gridArea="header"
+                        direction="row"
+                        align="center"
+                        justify="between"
+                        pad={{ horizontal: 'medium', vertical: 'small' }}
+
+                    >
+                        <Text weight='bold' size="1.4em" color="#6FFFB0">Orçamento</Text>
+                    </Box>
                     <Box direction="column" pad='small' gridArea="nav">
-                        <Box direction="row" pad='xsmall'>
+                        <Box pad='medium' width="large">
                             <Box width='medium' pad='xsmall'>
-                                <Text weight='bold' color='white'>Produto</Text>
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Produto</Text>
                                 <TextInput
                                     placeholder="Item"
                                     value={dataBudget.item}
-                                    onChange={handleChange('item')}
+                                    onChange={onChange}
+                                    suggestions={listProductsSuggestion.map((c) => c.name).filter((f) => f)}
+                                    onSuggestionSelect={onSuggestionSelect}
+                                    aria-label="Input Text"
                                 />
                             </Box>
-                            <Box width='small' pad='xsmall'>
-                                <Text weight='bold' color='white'>Qtd</Text>
+                            <Box width='medium' pad='xsmall'>
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Quantidade</Text>
                                 <TextInput
                                     placeholder="Quantidade"
                                     value={dataBudget.quantidade}
                                     onChange={handleChange('quantidade')}
                                 />
                             </Box>
-                            <Box width='small' pad='xsmall'>
-                                <Text weight='bold' color='white'>Vlr Unt</Text>
+                            <Box width='medium' pad='xsmall'>
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor Unitário</Text>
                                 <TextInput
                                     placeholder="Valor Unitário"
                                     value={dataBudget.valorUnitario}
                                     onChange={handleChange('valorUnitario')}
                                 />
                             </Box>
-                            <Box width='small' pad='xsmall'>
-                                <Text weight='bold' color='white'>Valor</Text>
+                            <Box width='medium' pad='xsmall'>
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor</Text>
                                 <TextInput
                                     placeholder="Valor"
                                     value={dataBudget.valor}
                                     onChange={handleChange('valor')}
                                 />
                             </Box>
-                            <Box width='small' pad='medium' margin='0.5em' align="center">
+                            <Box direction="row-reverse" gap="medium" alignSelf="end" pad="xsmall">
                                 <Button type="submit" primary label="Add" onClick={() => { addBudget() }} />
                             </Box>
                         </Box>
