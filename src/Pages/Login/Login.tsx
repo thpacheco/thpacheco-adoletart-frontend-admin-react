@@ -37,18 +37,20 @@ const Login = () => {
                             onSubmit={() => handleLogin()}
                         >
                             {ErrorMessage && <Text alignSelf='center' color='status-critical'>Usuário ou senha inválido</Text>}
-                            <FormField name="name" htmlFor="text-input-id" label="Login">
+                            <Box gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">E-mail</Text>
                                 <TextInput
                                     value={login}
                                     onChange={event => setLogin(event.target.value)}
                                 />
-                            </FormField>
-                            <FormField name="name" htmlFor="text-input-id" label="Senha">
+                            </Box>
+                            <Box gap="small" pad="xsmall">
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Senha</Text>
                                 <TextInput type='password'
                                     value={senha}
                                     onChange={event => setSenha(event.target.value)}
                                 />
-                            </FormField>
+                            </Box>
                             {loading &&
                                 <Box align="center" gap="xsmall" pad='small'>
                                     <Spinner
@@ -61,8 +63,8 @@ const Login = () => {
                                     />
                                 </Box>
                             }
-                            <Box gap="medium">
-                                <Button type="submit" primary label="Entrar" />
+                            <Box gap="medium" pad="medium">
+                                <Button type="submit" primary label="Login" />
                             </Box>
                         </Form>
                     </Box>
