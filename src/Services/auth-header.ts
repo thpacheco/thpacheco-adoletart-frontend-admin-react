@@ -1,11 +1,12 @@
+import AuthHelper from "../Common/AuthHelper";
+
 export default function authHeader() {
-    const userStr = localStorage.getItem("user");
-    let user = null;
-    if (userStr)
-      user = JSON.parse(userStr);
-    if (user && user.accessToken) {
-      return { Authorization: 'Bearer ' + user.accessToken };
-    } else {
-      return {};
+  return {
+    headers: {
+      Authorization: 'Bearer ' + `${AuthHelper.getToken()}`,
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*"
     }
-  }
+  };
+} 

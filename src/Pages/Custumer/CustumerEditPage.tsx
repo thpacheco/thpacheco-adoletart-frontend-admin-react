@@ -59,7 +59,6 @@ const CustumerEditPage = () => {
                 setCustumer(response.data)
                 setLoading(false)
                 setNotification({ title: "Sucesso", message: "Cliente atualizado com sucesso", status: `${StatusNotification.SUCCESS}`, })
-                debugger;
                 getCustumerByID(Number(params.id));
             },
             () => {

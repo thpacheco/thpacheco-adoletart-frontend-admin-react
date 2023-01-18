@@ -9,7 +9,6 @@ const HeaderComponent = () => {
     let navigate = useNavigate();
 
     const isAuth = () => {
-        debugger;
         AuthHelper.ClearSession();
         navigate('/login')
     };

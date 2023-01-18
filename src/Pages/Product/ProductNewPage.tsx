@@ -50,7 +50,6 @@ const ProductNewPage = () => {
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 2,
             }).format(value);
-            debugger
             if (String(value).includes(".") && !n.includes(".")) {
                 return n + ".";
             }

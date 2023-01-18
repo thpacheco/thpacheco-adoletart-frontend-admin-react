@@ -1,19 +1,13 @@
 import axios from "axios";
 import AuthHelper from "../Common/AuthHelper";
 import Custumer from "../Models/CustumerModel";
+import authHeader from "./auth-header";
 const API_URL = "https://api.adoletarts.com.br/v1/api/";
 // const API_URL = "https://localhost:7043/v1/api/";
-const header = {
-    headers: {
-        Authorization: 'Bearer ' + `${AuthHelper.getToken()}`,
-        "Content-Type" : "application/json",
-        "Access-Control-Allow-Headers" : "Content-Type",
-        "Access-Control-Allow-Origin": "*"
-    }
-};
 
 class CustumerService {
     createNewCustumer(objCreate: Custumer) {
+        const header = authHeader();
         return axios
             .post(API_URL + "custumer", objCreate, header)
             .then(response => {
@@ -24,6 +18,7 @@ class CustumerService {
     }
 
     updateCustumer(id: number, objCreate: Custumer) {
+        const header = authHeader();
         console.log(header);
         return axios
             .put(API_URL + "custumer" + id, objCreate, header)
@@ -35,6 +30,7 @@ class CustumerService {
     }
 
     listAllCustumers() {
+        const header = authHeader();
         return axios.get(API_URL + "custumer", header)
             .then(response => {
                 return response.data
@@ -45,6 +41,7 @@ class CustumerService {
     }
 
     getCustumerByID(id: number) {
+        const header = authHeader();
         return axios.get(API_URL + "custumer/" + id, header)
             .then(response => {
                 return response.data
@@ -56,7 +53,7 @@ class CustumerService {
     }
 
     deleteCustumer(id: number) {
-        return axios.delete(API_URL + "custumer/" + id, header)
+        const header = authHeader(); return axios.delete(API_URL + "custumer/" + id, header)
             .then(response => {
                 return response.data
             })
@@ -66,6 +63,7 @@ class CustumerService {
     }
 
     countAllCustumer() {
+        const header = authHeader();
         return axios.get(API_URL + "custumer/count", header)
             .then(response => {
                 return response.data

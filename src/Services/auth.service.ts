@@ -19,8 +19,7 @@ class AuthService {
             }, axiosConfig)
             .then(response => {
                 if (response.data.data.token) {
-                    AuthHelper.ClearSession()
-                    localStorage.setItem("accessToken", JSON.stringify(response.data));
+                    AuthHelper.SetSessionToken(response.data);
                 }
                 return response.data;
             });

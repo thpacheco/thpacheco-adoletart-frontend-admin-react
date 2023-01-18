@@ -44,10 +44,16 @@ export default class AuthHelper {
         localStorage.clear();
     }
 
+    public static SetSessionToken(data: any): void {
+        localStorage.clear();
+        localStorage.setItem("accessToken", JSON.stringify(data));
+        this.getToken();
+    }
+
     public static getToken(): string {
         const localItem = localStorage.getItem('accessToken');
         const token = JSON.parse(localItem!) as JwtData
-        if (localItem !== null && token.data.token !== null) {
+        if (localItem && token.data.token) {
             const decoded = jwtDecode<JwtPayload>(token.data.token);
             if (decoded && decoded.exp! > Date.now() / 1000) {
                 return token.data.token;

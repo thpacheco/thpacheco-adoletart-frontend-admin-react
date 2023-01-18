@@ -45,7 +45,6 @@ const BudgetPage = () => {
     }
 
     const onChange = (event: any) => {
-        debugger
         const nextValue = event.target.value;
 
         setdataBudget({ ...dataBudget, ['item']: nextValue });
@@ -65,7 +64,6 @@ const BudgetPage = () => {
     };
 
     const onSuggestionSelect = (event: any) => {
-        debugger
         setdataBudget({ ...dataBudget, ['item']: event.suggestion });
     };
 
