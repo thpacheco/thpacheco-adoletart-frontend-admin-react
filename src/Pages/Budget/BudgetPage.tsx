@@ -129,7 +129,7 @@ const BudgetPage = () => {
                                     onChange={handleChange('valor')}
                                 />
                             </Box>
-                            <Box direction="row-reverse" gap="medium" alignSelf="end" pad="xsmall">
+                            <Box direction="row-reverse" gap="medium" alignSelf="center" pad="small">
                                 <Button type="submit" primary label="Add" onClick={() => { addBudget() }} />
                             </Box>
                         </Box>

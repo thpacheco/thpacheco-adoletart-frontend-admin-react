@@ -18,7 +18,6 @@ const Login = () => {
             () => {
                 setLoading(false);
                 navigate('/');
-                window.location.reload();
             },
             () => {
                 setLoading(false);
