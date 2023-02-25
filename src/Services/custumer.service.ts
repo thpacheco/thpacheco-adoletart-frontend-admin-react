@@ -2,8 +2,8 @@ import axios from "axios";
 import AuthHelper from "../Common/AuthHelper";
 import Custumer from "../Models/CustumerModel";
 import authHeader from "./auth-header";
-const API_URL = "https://api.adoletarts.com.br/v1/api/";
-// const API_URL = "https://localhost:7043/v1/api/";
+const API_URL = `${process.env.REACT_APP_API_URL}`;
+debugger
 
 class CustumerService {
     createNewCustumer(objCreate: Custumer) {
@@ -53,7 +53,8 @@ class CustumerService {
     }
 
     deleteCustumer(id: number) {
-        const header = authHeader(); return axios.delete(API_URL + "custumer/" + id, header)
+        const header = authHeader();
+         return axios.delete(API_URL + "custumer/" + id, header)
             .then(response => {
                 return response.data
             })
