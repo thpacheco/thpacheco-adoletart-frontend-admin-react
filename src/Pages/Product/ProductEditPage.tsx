@@ -17,7 +17,8 @@ export const editProduct: Product = {
     ammount: 0,
     ammountMinimun: 0,
     ammount_charged: 0,
-    description: ''
+    description: '',
+    userid: 0
 };
 export const NotificatioModel: NotificationModel = {
     title: '',
@@ -61,7 +62,12 @@ const ProductEditPage = () => {
     const updateCustumer = () => {
         setLoading(true);
         const id = Number(params.id)
-        const objProductEdit: Product = { ...product, price: Number(FormatCurrency(product.price)), ammount_charged: Number(FormatCurrency(product.ammount_charged)) }
+        const objProductEdit: Product = {
+            ...product,
+            price: Number(FormatCurrency(product.price)),
+            ammount_charged: Number(FormatCurrency(product.ammount_charged)),
+            userid: 5
+        }
         ProductService.updateProduct(id, objProductEdit).then(
             (response) => {
                 setMsgVisible(true)
@@ -166,11 +172,14 @@ const ProductEditPage = () => {
                             <Box direction="row" justify="between">
                                 <Box direction="column" gap="small" pad="xsmall">
                                     <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor Item</Text>
+                                    <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">{product.price}</Text>
                                     <CurrencyInput name="price" type="text" customInput={TextInput} value={product.price} onValueChange={(value) => { handleChangeMasked(value, "price") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
                                 </Box>
 
                                 <Box direction="column" gap="small" pad="xsmall">
                                     <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor cobrado</Text>
+                                    <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">{product.ammount_charged}</Text>
+
                                     <CurrencyInput customInput={TextInput} value={product.ammount_charged} onValueChange={(value) => { handleChangeMasked(value, "ammount_charged") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
                                 </Box>
                             </Box>

@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:local": "react-scripts start .env.local",
+    "start:local": "react-scripts start .env.development",
     "start:prod": "react-scripts start .env.prod",
     "build": "react-scripts build",
     "test": "react-scripts test",

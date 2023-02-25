@@ -2,14 +2,19 @@ import { Avatar, Box, Button, Card, DataTable, Form, FormField, Grid, Heading, M
 import { User } from "grommet-icons";
 import { useEffect, useState } from "react";
 import Product from "../../Models/ProductModel";
+import Custumer from "../../Models/CustumerModel";
+import CustumerService from "../../Services/custumer.service";
 import ProductService from '../../Services/product.service'
+import CustumerBudget from "../../Models/CustumerModel";
+import CurrencyInput from "react-currency-input-field";
+import Budget from "../../Models/BudgetModel";
 
-export const dataBudgetDefault = {
-    idBudGet: 0,
+export const dataBudgetDefault: Budget = {
+    id: 0,
     item: '',
-    quantidade: 0,
-    valorUnitario: 0,
-    valor: 0
+    ammount: 0,
+    ammountMinimun: 0,
+    price: 0,
 };
 export const products: Product = {
     id: 0,
@@ -18,7 +23,15 @@ export const products: Product = {
     ammount: 0,
     ammountMinimun: 0,
     ammount_charged: 0,
-    description: ''
+    description: '',
+    userid:0
+};
+
+export const custumersBudget: CustumerBudget = {
+    id: 0,
+    name: '',
+    email: '',
+    telephone: ''
 };
 
 const amountFormatter = new Intl.NumberFormat('pt-BR', {
@@ -32,6 +45,8 @@ const BudgetPage = () => {
     const [listBudget, setlistBudget] = useState([dataBudgetDefault]);
     const [listProducts, setListProducts] = useState([products]);
     const [listProductsSuggestion, setlistProductsSuggestion] = useState(listProducts);
+    const [listCustumers, setListCustumers] = useState([custumersBudget]);
+    const [_listCustumers, _setListCustumers] = useState(custumersBudget);
 
     useEffect(() => {
         setlistBudget(() => [...[]]);
@@ -44,9 +59,24 @@ const BudgetPage = () => {
         });
     }
 
-    const onChange = (event: any) => {
-        const nextValue = event.target.value;
+    const getListAllCustumers = () => {
+        CustumerService.listAllCustumers().then((response: any) => {
+            setListCustumers(response.data)
+        });
+    }
 
+    const onChangeSuggestionProduct = (event: any) => {
+        const nextValue = event.target.value;
+        setdataBudget({ ...dataBudget, ['item']: nextValue });
+
+        if (!nextValue) setlistProductsSuggestion(listProducts);
+        else {
+            setlistProductsSuggestion(listProducts.filter((s) => s.name));
+        }
+    };
+
+    const onChangeSuggestionCustumers = (event: any) => {
+        const nextValue = event.target.value;
         setdataBudget({ ...dataBudget, ['item']: nextValue });
 
         if (!nextValue) setlistProductsSuggestion(listProducts);
@@ -56,15 +86,27 @@ const BudgetPage = () => {
     };
 
     const handleChange = (prop: keyof any) => async (event: React.ChangeEvent<{ value: unknown }>) => {
+        debugger
         setdataBudget({ ...dataBudget, [prop]: event.target.value });
+        setdataBudget({ ...dataBudget, ['item']: "Thiago Pacheco" });
+        setdataBudget({ ...dataBudget, ['ammount']: 10 });
+        setdataBudget({ ...dataBudget, ['price']: 20 });
     }
 
     const addBudget = () => {
         setlistBudget(listBudget => [...listBudget, dataBudget]);
     };
 
-    const onSuggestionSelect = (event: any) => {
+    const onSuggestionProductSelect = (event: any) => {
         setdataBudget({ ...dataBudget, ['item']: event.suggestion });
+    };
+
+    const onSuggestionCustumersSelect = (event: any) => {
+        setdataBudget({ ...dataBudget, ['item']: event.suggestion });
+    };
+
+    const handleChangeMasked = (value: any, name: string) => {
+        setdataBudget({ ...dataBudget, [name]: value });
     };
 
     return (
@@ -97,9 +139,9 @@ const BudgetPage = () => {
                                 <TextInput
                                     placeholder="Item"
                                     value={dataBudget.item}
-                                    onChange={onChange}
+                                    onChange={onChangeSuggestionProduct}
                                     suggestions={listProductsSuggestion.map((c) => c.name).filter((f) => f)}
-                                    onSuggestionSelect={onSuggestionSelect}
+                                    onSuggestionSelect={onSuggestionProductSelect}
                                     aria-label="Input Text"
                                 />
                             </Box>
@@ -107,25 +149,17 @@ const BudgetPage = () => {
                                 <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Quantidade</Text>
                                 <TextInput
                                     placeholder="Quantidade"
-                                    value={dataBudget.quantidade}
-                                    onChange={handleChange('quantidade')}
+                                    value={dataBudget.ammount}
+                                    onChange={handleChange('ammount')}
                                 />
                             </Box>
                             <Box width='medium' pad='xsmall'>
-                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor Unitário</Text>
-                                <TextInput
-                                    placeholder="Valor Unitário"
-                                    value={dataBudget.valorUnitario}
-                                    onChange={handleChange('valorUnitario')}
-                                />
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor Unitário - {_listCustumers.id}</Text>
+                                <CurrencyInput customInput={TextInput} value={dataBudget.ammountMinimun} onValueChange={(value) => { handleChangeMasked(value, "ammountMinimun") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
                             </Box>
                             <Box width='medium' pad='xsmall'>
-                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor</Text>
-                                <TextInput
-                                    placeholder="Valor"
-                                    value={dataBudget.valor}
-                                    onChange={handleChange('valor')}
-                                />
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor - {_listCustumers.telephone} </Text>
+                                <CurrencyInput customInput={TextInput} value={dataBudget.price} onValueChange={(value) => { handleChangeMasked(value, "price") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
                             </Box>
                             <Box direction="row-reverse" gap="medium" alignSelf="center" pad="small">
                                 <Button type="submit" primary label="Add" onClick={() => { addBudget() }} />
@@ -160,7 +194,7 @@ const BudgetPage = () => {
                                         {
                                             property: 'valor',
                                             header: 'Valor',
-                                            render: (datum) => amountFormatter.format(datum.valor),
+                                            render: (datum) => amountFormatter.format(datum.price),
                                             align: 'end',
                                             aggregate: 'sum',
                                             footer: { aggregate: true },

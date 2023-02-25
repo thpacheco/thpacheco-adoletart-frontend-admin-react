@@ -6,4 +6,5 @@ export default interface Product {
     ammountMinimun:number,
     ammount_charged:number,
     description:string,
+    userid:number
 };

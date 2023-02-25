@@ -1,5 +1,5 @@
 
-export default interface Custumer {
+export default interface CustumerBudget {
     id: number
     name: string,
     email: string,

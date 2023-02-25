@@ -16,7 +16,8 @@ export const products: Product = {
     ammount: 0,
     ammountMinimun: 0,
     ammount_charged: 0,
-    description: ''
+    description: '',
+    userid:0
 };
 export const NotificatioModel: NotificationModel = {
     title: '',

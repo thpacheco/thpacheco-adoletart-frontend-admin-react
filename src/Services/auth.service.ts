@@ -1,8 +1,7 @@
 import axios from "axios";
 import AuthHelper from "../Common/AuthHelper";
-const API_URL = "https://api.adoletarts.com.br/v1/api/";
-// const API_URL = `${process.env.REACT_APP_API_URL}`;
-
+const API_URL = `${process.env.REACT_APP_API_URL}`;
+debugger
 
 let axiosConfig = {
     headers: {

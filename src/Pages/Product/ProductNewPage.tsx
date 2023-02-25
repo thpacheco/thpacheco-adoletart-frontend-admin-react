@@ -17,7 +17,8 @@ export const ProductCreate: Product = {
     ammount: 0,
     ammountMinimun: 0,
     ammount_charged: 0,
-    description: ''
+    description: '',
+    userid:0
 };
 
 export const NotificatioModel: NotificationModel = {
@@ -93,10 +94,7 @@ const ProductNewPage = () => {
 
         return digitMoney3;
     };
-
-    // const FloatConvertMoney = () => {
-    //     var number = Number(currency.replace(/[^0-9\.]+/g,""));
-    // }
+   
     const customTheme: ThemeType = {
         formField: {
             label: {
