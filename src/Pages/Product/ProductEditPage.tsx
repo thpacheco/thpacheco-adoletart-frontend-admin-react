@@ -1,11 +1,10 @@
-import { Avatar, Box, Button, Card, Form, FormField, Grid, Heading, Page, PageContent, Spinner, Text, TextInput } from "grommet";
+import { Avatar, Box, Button, Form, Grid, Page, PageContent, Spinner, Text, TextInput } from "grommet";
 import CurrencyInput from "react-currency-input-field";
-import { Basket, Compliance, Package, User } from "grommet-icons";
+import { Package } from "grommet-icons";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { StatusNotification } from "../../Common/Enum/StatusNotificarion";
 import NotificationComponent from "../../Components/notification";
-import Custumer from "../../Models/CustumerModel";
 import NotificationModel from "../../Models/Notification.model";
 import Product from "../../Models/ProductModel";
 import ProductService from '../../Services/product.service'
@@ -37,7 +36,7 @@ const ProductEditPage = () => {
     let params = useParams();
 
     useEffect(() => {
-        getCustumerByID(Number(params.id));
+        getProductByID(Number(params.id));
     }, []);
 
     const spinner = <Spinner
@@ -49,7 +48,7 @@ const ProductEditPage = () => {
         ]}
     />;
 
-    const getCustumerByID = (id: number) => {
+    const getProductByID = (id: number) => {
         ProductService.getProductByID(id).then(
             (response) => {
                 setProduct(response.data)
@@ -74,7 +73,7 @@ const ProductEditPage = () => {
                 setProduct(response.data)
                 setLoading(false)
                 setNotification({ title: "Sucesso", message: "Cliente atualizado com sucesso", status: `${StatusNotification.SUCCESS}`, })
-                getCustumerByID(Number(params.id));
+                getProductByID(Number(params.id));
             },
             () => {
                 setMsgVisible(true)
@@ -172,15 +171,12 @@ const ProductEditPage = () => {
                             <Box direction="row" justify="between">
                                 <Box direction="column" gap="small" pad="xsmall">
                                     <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor Item</Text>
-                                    <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">{product.price}</Text>
                                     <CurrencyInput name="price" type="text" customInput={TextInput} value={product.price} onValueChange={(value) => { handleChangeMasked(value, "price") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
                                 </Box>
 
                                 <Box direction="column" gap="small" pad="xsmall">
                                     <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Valor cobrado</Text>
-                                    <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">{product.ammount_charged}</Text>
-
-                                    <CurrencyInput customInput={TextInput} value={product.ammount_charged} onValueChange={(value) => { handleChangeMasked(value, "ammount_charged") }} allowDecimals={true} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
+                                    <CurrencyInput customInput={TextInput} value={product.ammount_charged} onValueChange={(value) => { handleChangeMasked(value, "ammount_charged") }} allowDecimals={false} intlConfig={{ locale: "pt-BR", currency: "BRL" }} />
                                 </Box>
                             </Box>
                             <Box direction="column" gap="small" pad="xsmall">

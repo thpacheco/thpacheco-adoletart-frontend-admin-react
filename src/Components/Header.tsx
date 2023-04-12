@@ -2,6 +2,7 @@ import { Anchor, Avatar, Box, Menu } from "grommet";
 import { Menu as MenuIcons } from "grommet-icons";
 import { useNavigate } from "react-router-dom";
 import AuthHelper from "../Common/AuthHelper";
+import { colors } from "@mui/material";
 
 
 
@@ -14,13 +15,13 @@ const HeaderComponent = () => {
     };
 
     return (
-        <Box tag="header" background="brand" justify="between" pad="small">
+        <Box tag="header" background="dark-3" justify="between" pad="xxsmall">
             <Box
                 gridArea="header"
                 direction="row"
                 align="center"
                 justify="between"
-                pad={{ horizontal: 'medium', vertical: 'xxsmall' }}
+                pad={{ horizontal: 'small', vertical: 'xxsmall' }}
             >
                 <Box direction="row" pad='none' align="center" gap="small">
                     <Avatar background="dark-1">IRIS</Avatar>

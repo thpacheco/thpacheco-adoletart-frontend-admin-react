@@ -1,6 +1,6 @@
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { Box, Button, DataTable, Page, PageContent, Spinner, Text } from "grommet";
-import { Add, Checkmark, Currency, Erase, FormTrash } from "grommet-icons";
+import { Add, Checkmark, Close, Currency, Erase, FormTrash } from "grommet-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { number } from "yup";
@@ -14,7 +14,9 @@ export const custumes: Custumer = {
     id: 0,
     name: '',
     email: '',
-    telephone: ''
+    telephone: '',
+    active: false,
+
 };
 
 export const NotificatioModel: NotificationModel = {
@@ -121,7 +123,7 @@ const CustumerListPage = () => {
                 </Box>
                 <Box margin='small'>
                     {
-                        listCustumers.length  === 0 ?
+                        listCustumers.length === 0 ?
                             <Box align="center" justify='center'>
                                 <Text weight="bold">Voçê ainda não possui nenhum cliente cadastrado.</Text>
                             </Box> :
@@ -153,13 +155,14 @@ const CustumerListPage = () => {
                                         primary: true,
                                     },
                                     {
-                                        property: 'ativo',
-                                        render: dataItem => (<Checkmark color="#008000" size='medium' />),
-                                        header: <Text>Ativo</Text>,
+                                        property: 'active',
+                                        render: dataItem => (dataItem.active ? <Checkmark color="#008000" size='medium' /> : <Close color="red" size='medium' />),
+                                        header: <Text>Status</Text>,
                                         primary: true,
+                                        align: 'center',
                                     },
                                     {
-                                        property: '',
+                                        property: 'id',
                                         render: (dataItem) => (<Button
                                             a11yTitle="100 Filters Applied"
                                             icon={<Erase color='neutral-3' />}

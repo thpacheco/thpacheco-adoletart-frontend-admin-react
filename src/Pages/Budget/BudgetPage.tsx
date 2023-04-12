@@ -24,14 +24,15 @@ export const products: Product = {
     ammountMinimun: 0,
     ammount_charged: 0,
     description: '',
-    userid:0
+    userid: 0
 };
 
 export const custumersBudget: CustumerBudget = {
     id: 0,
     name: '',
     email: '',
-    telephone: ''
+    telephone: '',
+    active: false,
 };
 
 const amountFormatter = new Intl.NumberFormat('pt-BR', {

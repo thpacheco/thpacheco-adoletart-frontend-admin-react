@@ -5,7 +5,7 @@ import NotificationComponent from "../../Components/notification";
 import Custumer from "../../Models/CustumerModel";
 import NotificationModel from "../../Models/Notification.model";
 import CustumerService from '../../Services/custumer.service'
-import { MailOption } from "grommet-icons";
+import { FormPrevious, MailOption } from "grommet-icons";
 import { useNavigate } from "react-router-dom";
 
 
@@ -14,6 +14,7 @@ export const CustumerCreate: Custumer = {
     name: '',
     email: '',
     telephone: '',
+    active: true,
 };
 
 export const NotificatioModel: NotificationModel = {
@@ -98,7 +99,7 @@ const CustumerNewPage = () => {
                                     onChange={handleChange('email')} />
                             </Box>
                             <Box gap="small" pad="xsmall">
-                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">E-mail</Text>
+                                <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Telefone</Text>
                                 <MaskedInput
                                     mask={[
                                         { fixed: '(' },
@@ -110,24 +111,29 @@ const CustumerNewPage = () => {
                                         { fixed: ')' },
                                         { fixed: ' ' },
                                         {
-                                            length: 4,
-                                            regexp: /^[0-9]{1,4}$/,
-                                            placeholder: 'xxxx',
+                                            length: 5,
+                                            regexp: /^[0-9]{1,5}$/,
+                                            placeholder: 'xxxxx',
                                         },
                                         { fixed: '-' },
                                         {
                                             length: 4,
-                                            regexp: /^[0-9]{1,4}$/,
-                                            placeholder: 'xxxx',
+                                            regexp: /^[0-9]{1,5}$/,
+                                            placeholder: 'xxxxx',
                                         },
                                     ]}
                                     value={custumerCreate.telephone}
                                     onChange={handleChange('telephone')}
                                 />
                             </Box>
-                            <Box direction="row-reverse" gap="medium" pad="xsmall">
-                                {loading ? spinner : <Button type="submit" primary label="Salvar" />}
-                                <Button type="reset" label="Limpar" />
+                            <Box direction="row" justify="between" gap="medium" pad="xsmall">
+                                <Box direction="column" alignSelf="start" gap="medium" pad="xsmall">
+                                    <Button alignSelf="start" onClick={() => { navigate('new', { replace: true }); }} icon={<FormPrevious size='medium' />} label="Voltar" margin={{ end: 'small' }} />
+                                </Box>
+                                <Box alignSelf="end" direction="row-reverse" gap="medium" pad="xsmall">
+                                    {loading ? spinner : <Button type="submit" primary label="Salvar" />}
+                                    <Button type="reset" label="Limpar" />
+                                </Box>
                             </Box>
                         </Form>
                     </Box>

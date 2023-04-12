@@ -1,14 +1,14 @@
 import { useState } from "react";
 import CurrencyInput from "react-currency-input-field";
-import { Page, PageContent, Button, Box, Form, FormField, TextInput, Text, Notification, Spinner, Grommet } from "grommet";
-import { grommet, ThemeType } from 'grommet/themes';
+import { Page, PageContent, Button, Box, Form, TextInput, Text, Spinner } from "grommet";
+import { ThemeType } from 'grommet/themes';
 import { StatusNotification } from "../../Common/Enum/StatusNotificarion";
 import NotificationComponent from "../../Components/notification";
 import NotificationModel from "../../Models/Notification.model";
 import ProductService from '../../Services/product.service'
 import Product from "../../Models/ProductModel";
-import { deepMerge } from "grommet/utils";
 import { useNavigate } from "react-router-dom";
+import { FormPrevious } from "grommet-icons";
 
 export const ProductCreate: Product = {
     id: 0,
@@ -18,7 +18,7 @@ export const ProductCreate: Product = {
     ammountMinimun: 0,
     ammount_charged: 0,
     description: '',
-    userid:0
+    userid: 0
 };
 
 export const NotificatioModel: NotificationModel = {
@@ -94,7 +94,7 @@ const ProductNewPage = () => {
 
         return digitMoney3;
     };
-   
+
     const customTheme: ThemeType = {
         formField: {
             label: {
@@ -137,8 +137,8 @@ const ProductNewPage = () => {
     }
 
     return (
-        <Page fill >
-            <PageContent fill pad='xsmall' >
+        <Page fill pad={{ horizontal: 'auto', vertical: 'xxsmall' }} >
+            <PageContent fill pad='auto' >
                 {msgvisible && (
                     <NotificationComponent title={notification.title} message={notification.message} status={notification.status} onCloseNotification={CloseNotification}></NotificationComponent>
                 )}
@@ -149,10 +149,10 @@ const ProductNewPage = () => {
                     justify="between"
                     pad={{ horizontal: '2em', vertical: 'auto' }}
                 >
-                    <Text weight='bold' size="1.4em" color="#6FFFB0">Cadastro de produtos</Text>
+                    <Text weight='bold' alignSelf="center" size="1.4em" color="#FFF">Cadastro de produtos</Text>
                 </Box>
-                <Box gridArea="main" flex pad='xsmall' >
-                    <Box pad='medium' width="large">
+                <Box gridArea="main" flex pad='xxsmall' >
+                    <Box pad='small' width="large">
                         <Form onReset={() => setProductCreate(productCreate)} onSubmit={() => { SalveNewProduct() }}>
                             <Box gap="small" pad="xsmall">
                                 <Text color="#6FFFB0" textAlign="start" weight="bold" size="medium">Nome</Text>
@@ -185,9 +185,14 @@ const ProductNewPage = () => {
                                     onChange={handleChange('description')} />
                             </Box>
 
-                            <Box direction="row-reverse" gap="medium" alignSelf="end" pad="xsmall">
-                                {loading ? spinner : <Button type="submit" primary label="Salvar" />}
-                                <Button type="reset" label="Limpar" />
+                            <Box direction="row" justify="between" pad="medium" gap="xsmall">
+                                <Box direction="column" alignSelf="start" gap="medium" pad="xsmall">
+                                    <Button alignSelf="start" onClick={() => { navigate('new', { replace: true }); }} icon={<FormPrevious size='medium' />} label="Voltar" margin={{ end: 'small' }} />
+                                </Box>
+                                <Box alignSelf="end" direction="row-reverse" gap="medium" pad="xsmall">
+                                    {loading ? spinner : <Button type="submit" primary label="Salvar" />}
+                                    <Button type="reset" label="Limpar" />
+                                </Box>
                             </Box>
                         </Form>
                     </Box>

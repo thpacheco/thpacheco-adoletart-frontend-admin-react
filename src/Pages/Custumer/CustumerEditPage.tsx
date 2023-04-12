@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, Form, FormField, Grid, Heading, MaskedInput, Page, PageContent, Spinner, Text, TextInput } from "grommet";
+import { Avatar, Box, Button, Card, CheckBox, Form, FormField, Grid, Heading, MaskedInput, Page, PageContent, Spinner, Text, TextInput } from "grommet";
 import { Basket, Compliance, User } from "grommet-icons";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -12,7 +12,8 @@ export const editCustumer: Custumer = {
     id: 0,
     name: '',
     email: '',
-    telephone: ''
+    telephone: '',
+    active: true,
 }
 
 export const NotificatioModel: NotificationModel = {
@@ -28,6 +29,8 @@ const CustumerEditPage = () => {
     const [msgvisible, setMsgVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
+    const [checked] = useState(true);
+    const [stateActive, setStateActive] = useState(false);
     let params = useParams();
 
 
@@ -73,6 +76,11 @@ const CustumerEditPage = () => {
         setMsgVisible(false);
     }
 
+    const StateActiveInative = (active: boolean) => {
+        setStateActive(active);
+        setCustumer({ ...custumer, "active": active });
+    }
+
     const handleChange = (prop: keyof any) => async (event: React.ChangeEvent<{ value: unknown }>) =>
         setCustumer({ ...custumer, [prop]: event.target.value });
 
@@ -114,12 +122,15 @@ const CustumerEditPage = () => {
                                 <Box>{custumer.email}</Box>
                             </Box>
                             <Box direction="column" pad='small'>
-                                <Text weight='bold' color='white'>Endereço</Text>
-                                <Text color='white'>Rua</Text>
+                                <Text weight='bold' color='white'>Status:</Text>
+                                <Text color='white'>{custumer.active ?
+                                    <Text color="#6FFFB0">Ativo</Text> :
+                                    <Text color="red">Inativo</Text>}
+                                </Text>
                             </Box>
                         </Box>
                     </Box>
-                    <Box gridArea="main" pad='medium' background="#2c2828">
+                    <Box gridArea="main" pad='xsmall' background="#2c2828">
                         <Form
                             value={value}
                             onChange={nextValue => setValue(nextValue)}
@@ -149,9 +160,9 @@ const CustumerEditPage = () => {
                                         { fixed: ')' },
                                         { fixed: ' ' },
                                         {
-                                            length: 4,
-                                            regexp: /^[0-9]{1,4}$/,
-                                            placeholder: 'xxxx',
+                                            length: 5,
+                                            regexp: /^[0-9]{1,5}$/,
+                                            placeholder: 'xxxxx',
                                         },
                                         { fixed: '-' },
                                         {
@@ -164,9 +175,17 @@ const CustumerEditPage = () => {
                                     onChange={handleChange('telephone')}
                                 />
                             </FormField>
-                            <Box direction="row" gap="medium">
-                                {loading ? spinner : <Button type="submit" primary label="Salvar" onClick={() => { updateCustumer() }} />}
-                                <Button type="reset" label="Limpar" onClick={() => { }} />
+                            <FormField name="name" htmlFor="text-input-id" label="Status">
+                                <CheckBox
+                                    checked={custumer.active}
+                                    label='Ativo'
+                                    onChange={event => StateActiveInative(event.target.checked)}
+                                />
+                            </FormField>
+                            <Box direction="row-reverse" gap="medium" alignSelf="end" pad="xxsmall">
+                                {loading ? spinner : <Button type="submit" primary label="Atualizar" onClick={() => { updateCustumer() }} />}
+                                <Button type="reset" label="Limpar" />
+                                <Button type="reset" alignSelf="start" label="Limpar" />
                             </Box>
                         </Form>
                     </Box>

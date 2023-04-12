@@ -1,10 +1,7 @@
 import axios from "axios";
-import AuthHelper from "../Common/AuthHelper";
-import Custumer from "../Models/CustumerModel";
 import Product from "../Models/ProductModel";
 import authHeader from "./auth-header";
 const API_URL = `${process.env.REACT_APP_API_URL}`;
-debugger
 
 class ProductService {
     createNewProduct(objCreate: Product) {

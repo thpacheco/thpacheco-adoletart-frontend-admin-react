@@ -4,4 +4,5 @@ export default interface CustumerBudget {
     name: string,
     email: string,
     telephone: string,
+    active: boolean,
 };

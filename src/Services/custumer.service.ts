@@ -1,9 +1,7 @@
 import axios from "axios";
-import AuthHelper from "../Common/AuthHelper";
 import Custumer from "../Models/CustumerModel";
 import authHeader from "./auth-header";
 const API_URL = `${process.env.REACT_APP_API_URL}`;
-debugger
 
 class CustumerService {
     createNewCustumer(objCreate: Custumer) {
@@ -21,7 +19,7 @@ class CustumerService {
         const header = authHeader();
         console.log(header);
         return axios
-            .put(API_URL + "custumer" + id, objCreate, header)
+            .put(API_URL + "custumer/" + id, objCreate, header)
             .then(response => {
                 if (response.data) {
                 }
